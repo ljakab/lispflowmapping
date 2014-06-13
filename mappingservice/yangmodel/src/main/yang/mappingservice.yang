@@ -388,11 +388,26 @@
     	}
     }
     
+    grouping xtrSiteId {
+        container xtrSiteId {
+            leaf xtrId {
+                type binary;
+            }
+            leaf siteId {
+                type binary;
+            }
+        }
+    }
+
     grouping MapRegister {
     	reference "http://tools.ietf.org/html/rfc6830#section-6.1.6";
+        reference "http://tools.ietf.org/html/draft-ermagan-lisp-nat-traversal-05#section-4.3";
     	leaf proxyMapReply {
     		type boolean;
     	}
+        leaf xtrSiteIdPresent {
+            type boolean;
+        }
     	leaf wantMapNotify {
     		type boolean;
     	}
@@ -405,13 +420,13 @@
     	leaf authenticationData {
     		type binary;
     	}
-    	
     	uses EidToLocatorRecords;
-    	
+        uses xtrSiteId;
     }
     
     grouping MapNotify {
     	reference "http://tools.ietf.org/html/rfc6830#section-6.1.7";
+        reference "http://tools.ietf.org/html/draft-ermagan-lisp-nat-traversal-05#section-4.3";
     	leaf proxyMapReply {
     		type boolean;
     	}
@@ -428,6 +443,7 @@
     		type binary;
     	}
     	uses EidToLocatorRecords;
+        uses xtrSiteId;
     }
     
     grouping MapRequest {

@@ -18,6 +18,7 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.MapRegister;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.eidtolocatorrecords.EidToLocatorRecord;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.eidtolocatorrecords.EidToLocatorRecordBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.mapregisternotification.MapRegisterBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.xtrsiteid.XtrSiteIdBuilder;
 
 /**
  * This class deals with deserializing map register from udp to the java object.
@@ -38,6 +39,9 @@ public class MapRegisterSerializer {
         int size = Length.HEADER_SIZE;
         if (mapRegister.getAuthenticationData() != null) {
             size += mapRegister.getAuthenticationData().length;
+        }
+        if (mapRegister.isXtrSiteIdPresent()) {
+            size += Length.XTRID_SIZE + Length.SITEID_SIZE;
         }
         for (EidToLocatorRecord eidToLocatorRecord : mapRegister.getEidToLocatorRecord()) {
             size += EidToLocatorRecordSerializer.getInstance().getSerializationSize(eidToLocatorRecord);
@@ -61,6 +65,11 @@ public class MapRegisterSerializer {
         for (EidToLocatorRecord eidToLocatorRecord : mapRegister.getEidToLocatorRecord()) {
             EidToLocatorRecordSerializer.getInstance().serialize(registerBuffer, eidToLocatorRecord);
         }
+
+        if (mapRegister.isXtrSiteIdPresent()) {
+            registerBuffer.put(mapRegister.getXtrSiteId().getXtrId());
+            registerBuffer.put(mapRegister.getXtrSiteId().getSiteId());
+        }
         registerBuffer.clear();
         return registerBuffer;
     }
@@ -70,7 +79,10 @@ public class MapRegisterSerializer {
             MapRegisterBuilder builder = new MapRegisterBuilder();
             builder.setEidToLocatorRecord(new ArrayList<EidToLocatorRecord>());
 
-            builder.setProxyMapReply(ByteUtil.extractBit(registerBuffer.get(), Flags.PROXY));
+            byte typeAndFlags = registerBuffer.get();
+            boolean xtrSiteIdPresent = ByteUtil.extractBit(typeAndFlags, Flags.XTRSITEID);
+            builder.setProxyMapReply(ByteUtil.extractBit(typeAndFlags, Flags.PROXY));
+            builder.setXtrSiteIdPresent(xtrSiteIdPresent);
 
             registerBuffer.position(registerBuffer.position() + Length.RES);
             builder.setWantMapNotify(ByteUtil.extractBit(registerBuffer.get(), Flags.WANT_MAP_REPLY));
@@ -86,6 +98,17 @@ public class MapRegisterSerializer {
                 builder.getEidToLocatorRecord().add(
                         new EidToLocatorRecordBuilder(EidToLocatorRecordSerializer.getInstance().deserialize(registerBuffer)).build());
             }
+
+            if (xtrSiteIdPresent) {
+                byte[] xtrId  = new byte[Length.XTRID_SIZE];
+                registerBuffer.get(xtrId);
+                byte[] siteId = new byte[Length.SITEID_SIZE];
+                registerBuffer.get(siteId);
+                XtrSiteIdBuilder builder2 = new XtrSiteIdBuilder();
+                builder2.setXtrId(xtrId);
+                builder2.setSiteId(siteId);
+                builder.setXtrSiteId(builder2.build());
+            }
             registerBuffer.limit(registerBuffer.position());
             byte[] mapRegisterBytes = new byte[registerBuffer.position()];
             registerBuffer.position(0);
@@ -99,11 +122,14 @@ public class MapRegisterSerializer {
 
     private interface Flags {
         byte PROXY = 0x08;
+        byte XTRSITEID = 0x02;
         byte WANT_MAP_REPLY = 0x01;
     }
 
-    private interface Length {
+    public interface Length {
         int HEADER_SIZE = 16;
+        int XTRID_SIZE = 16;
+        int SITEID_SIZE = 8;
         int RES = 1;
     }
 }

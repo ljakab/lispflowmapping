@@ -8,9 +8,14 @@
 
 package org.opendaylight.lispflowmapping.southbound.lisp;
 
+import java.net.InetAddress;
+
 import org.opendaylight.controller.sal.binding.api.NotificationProviderService;
 import org.opendaylight.controller.sal.binding.api.data.DataBrokerService;
 import org.opendaylight.controller.sal.binding.api.data.DataModificationTransaction;
+import org.opendaylight.lispflowmapping.implementation.serializer.MapRegisterSerializer;
+import org.opendaylight.lispflowmapping.implementation.util.ByteUtil;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.xtrsiteid.XtrSiteId;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.inventory.rev130819.NodeId;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.inventory.rev130819.NodeRef;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.inventory.rev130819.NodeUpdatedBuilder;
@@ -29,8 +34,8 @@ public class LispInventoryService {
     private NotificationProviderService notificationProvider;
     private DataBrokerService dataBroker;
 
-    public void putNode(Node node) {
-        logger.info("Adding node " + node.getId().getValue());
+    private void putNode(Node node) {
+        logger.trace("Adding node " + node.getId().getValue());
         InstanceIdentifier<Nodes> nodesIdentifier = InstanceIdentifier.builder(Nodes.class).toInstance();
         if (dataBroker != null) {
             DataModificationTransaction transaction = dataBroker.beginTransaction();
@@ -41,8 +46,8 @@ public class LispInventoryService {
         }
     }
 
-    public void publishNodeUpdated(Node node) {
-        logger.info("Notifying update of node" + node.getId().getValue());
+    private void publishNodeUpdated(Node node) {
+        logger.trace("Notifying update of node " + node.getId().getValue());
         InstanceIdentifier<Node> identifier = InstanceIdentifier.builder(Nodes.class).child(Node.class, node.getKey()).toInstance();
         NodeRef nodeRef = new NodeRef(identifier);
         NodeUpdatedBuilder builder = new NodeUpdatedBuilder();
@@ -51,8 +56,8 @@ public class LispInventoryService {
         notificationProvider.publish(builder.build());
     }
 
-    public static Node getNodeFromLabel(String nodeLabel) {
-        NodeId nodeId = new NodeId(LISP_PREFIX + nodeLabel);
+    private static Node getNodeFromLabel(String nodeLabel) {
+        NodeId nodeId = new NodeId(nodeLabel);
         NodeKey nodeKey = new NodeKey(nodeId);
         NodeBuilder builder = new NodeBuilder();
         builder.setId(nodeId);
@@ -60,11 +65,25 @@ public class LispInventoryService {
         return builder.build();
     }
 
-    public void inventoryUpdate(String nodeLabel) {
-        logger.info("Updating Inventory with xTR " + nodeLabel);
+    private static String getNodeLabelFromAddress(InetAddress address) {
+        return LISP_PREFIX + address.getHostAddress();
+    }
+
+    private static String getNodeLabelFromAddressAndXtrId(InetAddress address, XtrSiteId xtrSiteId) {
+        String addressLabel = getNodeLabelFromAddress(address);
+        if (xtrSiteId == null) {
+            return addressLabel;
+        }
+        return addressLabel + "|" + ByteUtil.bytesToHex(xtrSiteId.getXtrId(), MapRegisterSerializer.Length.XTRID_SIZE);
+    }
+
+    public String inventoryUpdate(InetAddress address, XtrSiteId xtrSiteId) {
+        String nodeLabel = getNodeLabelFromAddressAndXtrId(address, xtrSiteId);
+        logger.debug("Updating Inventory with node " + nodeLabel);
         Node node = getNodeFromLabel(nodeLabel);
         putNode(node);
         publishNodeUpdated(node);
+        return nodeLabel;
     }
 
     public void setNotificationProvider(

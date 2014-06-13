@@ -26,6 +26,7 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.AddMappingBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.MapRegister;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.MapRequest;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.RequestMappingBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.xtrsiteid.XtrSiteId;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.transportaddress.TransportAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.PortNumber;
 import org.slf4j.Logger;
@@ -117,7 +118,6 @@ public class LispSouthboundService implements ILispSouthboundService {
     }
 
     private void handleMapRegister(ByteBuffer inBuffer, InetAddress sourceAddress, int port) {
-        inventoryService.inventoryUpdate(sourceAddress.getHostAddress());
         try {
             MapRegister mapRegister = MapRegisterSerializer.getInstance().deserialize(inBuffer);
             AddMappingBuilder addMappingBuilder = new AddMappingBuilder();
@@ -131,6 +131,14 @@ public class LispSouthboundService implements ILispSouthboundService {
                 logger.trace("MapRegister was published!");
             } else {
                 logger.warn("Notification Provider is null!");
+            }
+            if (inventoryService != null) {
+                XtrSiteId xtrSiteId = null;
+                if (mapRegister.isXtrSiteIdPresent()) {
+                    xtrSiteId = mapRegister.getXtrSiteId();
+                }
+                String nodeLabel = inventoryService.inventoryUpdate(sourceAddress, xtrSiteId);
+                logger.trace("Node {} was updated in the inventory service", nodeLabel);
             }
         } catch (RuntimeException re) {
             throw new LispMalformedPacketException("Couldn't deserialize Map-Register (len=" + inBuffer.capacity() + ")", re);

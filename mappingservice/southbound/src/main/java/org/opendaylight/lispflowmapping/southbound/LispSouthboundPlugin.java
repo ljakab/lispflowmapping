@@ -22,11 +22,13 @@ import org.eclipse.osgi.framework.console.CommandProvider;
 import org.opendaylight.controller.sal.binding.api.AbstractBindingAwareProvider;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.controller.sal.binding.api.NotificationProviderService;
+import org.opendaylight.controller.sal.binding.api.data.DataBrokerService;
 import org.opendaylight.lispflowmapping.implementation.serializer.LispMessage;
 import org.opendaylight.lispflowmapping.implementation.serializer.MapNotifySerializer;
 import org.opendaylight.lispflowmapping.implementation.serializer.MapReplySerializer;
 import org.opendaylight.lispflowmapping.implementation.serializer.MapRequestSerializer;
 import org.opendaylight.lispflowmapping.southbound.lisp.ILispSouthboundService;
+import org.opendaylight.lispflowmapping.southbound.lisp.LispInventoryService;
 import org.opendaylight.lispflowmapping.southbound.lisp.LispSouthboundService;
 import org.opendaylight.lispflowmapping.southbound.lisp.LispXtrSouthboundService;
 import org.opendaylight.lispflowmapping.type.sbplugin.IConfigLispSouthboundPlugin;
@@ -51,6 +53,7 @@ public class LispSouthboundPlugin extends AbstractBindingAwareProvider implement
     private LispIoThread xtrThread;
     private LispSouthboundService lispSouthboundService;
     private LispXtrSouthboundService lispXtrSouthboundService;
+    private LispInventoryService lispInventoryService;
     private volatile DatagramSocket socket = null;
     private final String MAP_NOTIFY = "MapNotify";
     private final String MAP_REPlY = "MapReply";
@@ -200,6 +203,7 @@ public class LispSouthboundPlugin extends AbstractBindingAwareProvider implement
         synchronized (startLock) {
             if (!alreadyInit) {
                 alreadyInit = true;
+                lispInventoryService = new LispInventoryService();
                 lispSouthboundService = new LispSouthboundService();
                 lispXtrSouthboundService = new LispXtrSouthboundService();
                 registerWithOSGIConsole();
@@ -215,7 +219,10 @@ public class LispSouthboundPlugin extends AbstractBindingAwareProvider implement
 
     private void registerRPCs(ProviderContext session) {
         try {
+            lispInventoryService.setDataBroker(session.getSALService(DataBrokerService.class));
+            lispInventoryService.setNotificationProvider(session.getSALService(NotificationProviderService.class));
             lispSouthboundService.setNotificationProvider(session.getSALService(NotificationProviderService.class));
+            lispSouthboundService.setInventoryService(lispInventoryService);
             lispXtrSouthboundService.setNotificationProvider(session.getSALService(NotificationProviderService.class));
             session.addRpcImplementation(LispflowmappingService.class, this);
         } catch (Throwable t) {

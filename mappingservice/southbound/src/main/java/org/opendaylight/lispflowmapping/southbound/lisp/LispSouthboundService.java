@@ -33,10 +33,15 @@ import org.slf4j.LoggerFactory;
 
 public class LispSouthboundService implements ILispSouthboundService {
     private NotificationProviderService notificationProvider;
+    private LispInventoryService inventoryService;
     protected static final Logger logger = LoggerFactory.getLogger(LispSouthboundService.class);
 
     public void setNotificationProvider(NotificationProviderService nps) {
         this.notificationProvider = nps;
+    }
+
+    public void setInventoryService(LispInventoryService lis) {
+        this.inventoryService = lis;
     }
 
     public void handlePacket(DatagramPacket packet) {
@@ -112,6 +117,7 @@ public class LispSouthboundService implements ILispSouthboundService {
     }
 
     private void handleMapRegister(ByteBuffer inBuffer, InetAddress sourceAddress, int port) {
+        inventoryService.inventoryUpdate(sourceAddress.getHostAddress());
         try {
             MapRegister mapRegister = MapRegisterSerializer.getInstance().deserialize(inBuffer);
             AddMappingBuilder addMappingBuilder = new AddMappingBuilder();

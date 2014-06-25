@@ -57,6 +57,7 @@
 							org.opendaylight.lispflowmapping.implementation.util,
 							org.opendaylight.controller.sal.binding.api,
 							org.opendaylight.controller.sal.binding.api.data,
+							org.opendaylight.yangtools.concepts,
 							org.opendaylight.yangtools.yang.binding,
 							org.opendaylight.yangtools.yang.common
 						</Import-Package>

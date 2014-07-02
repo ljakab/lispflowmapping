@@ -12,8 +12,10 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.osgi.framework.console.CommandInterpreter;
 import org.eclipse.osgi.framework.console.CommandProvider;
+import org.opendaylight.controller.sal.binding.api.AbstractBindingAwareProvider;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ConsumerContext;
+import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.controller.sal.binding.api.BindingAwareConsumer;
 import org.opendaylight.controller.sal.binding.api.NotificationListener;
 import org.opendaylight.controller.sal.binding.api.NotificationService;
@@ -61,7 +63,7 @@ import org.osgi.framework.FrameworkUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LispMappingService implements CommandProvider, IFlowMapping, BindingAwareConsumer, //
+public class LispMappingService extends AbstractBindingAwareProvider implements CommandProvider, IFlowMapping, //
         IMapRequestResultHandler, IMapNotifyHandler {
     protected static final Logger logger = LoggerFactory.getLogger(LispMappingService.class);
 
@@ -97,7 +99,7 @@ public class LispMappingService implements CommandProvider, IFlowMapping, Bindin
     void setBindingAwareBroker(BindingAwareBroker bindingAwareBroker) {
         logger.trace("BindingAwareBroker set!");
         BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
-        bindingAwareBroker.registerConsumer(this, bundleContext);
+        bindingAwareBroker.registerProvider(this, bundleContext);
     }
 
     void unsetBindingAwareBroker(BindingAwareBroker bindingAwareBroker) {
@@ -265,8 +267,8 @@ public class LispMappingService implements CommandProvider, IFlowMapping, Bindin
         return shouldAuthenticate;
     }
 
-    public void onSessionInitialized(ConsumerContext session) {
-        logger.info("Lisp Consumer session initialized!");
+    public void onSessionInitiated(ProviderContext session) {
+        logger.info("Lisp Provider session initiated!");
         notificationService = session.getSALService(NotificationService.class);
         registerNotificationListener(AddMapping.class, new MapRegisterNotificationHandler());
         registerNotificationListener(RequestMapping.class, new MapRequestNotificationHandler());

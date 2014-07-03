@@ -16,9 +16,10 @@ import org.opendaylight.controller.sal.binding.api.AbstractBindingAwareProvider;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ConsumerContext;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
-import org.opendaylight.controller.sal.binding.api.BindingAwareConsumer;
 import org.opendaylight.controller.sal.binding.api.NotificationListener;
+import org.opendaylight.controller.sal.binding.api.NotificationProviderService;
 import org.opendaylight.controller.sal.binding.api.NotificationService;
+import org.opendaylight.controller.sal.binding.api.data.DataBrokerService;
 import org.opendaylight.lispflowmapping.implementation.config.ConfigIni;
 import org.opendaylight.lispflowmapping.implementation.dao.MappingServiceKey;
 import org.opendaylight.lispflowmapping.implementation.dao.MappingServiceNoMaskKey;
@@ -63,6 +64,7 @@ import org.osgi.framework.FrameworkUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("deprecation")
 public class LispMappingService extends AbstractBindingAwareProvider implements CommandProvider, IFlowMapping, //
         IMapRequestResultHandler, IMapNotifyHandler {
     protected static final Logger logger = LoggerFactory.getLogger(LispMappingService.class);
@@ -71,6 +73,7 @@ public class LispMappingService extends AbstractBindingAwareProvider implements 
     private ILispDAO lispDao = null;
     private IMapResolverAsync mapResolver;
     private IMapServerAsync mapServer;
+    private LispInventoryService inventory;
     private volatile boolean shouldIterateMask;
     private volatile boolean shouldAuthenticate;
     private volatile boolean smr = configIni.smrIsSet();
@@ -269,6 +272,9 @@ public class LispMappingService extends AbstractBindingAwareProvider implements 
 
     public void onSessionInitiated(ProviderContext session) {
         logger.info("Lisp Provider session initiated!");
+        inventory = new LispInventoryService();
+        inventory.setNotificationProvider(session.getSALService(NotificationProviderService.class));
+        inventory.setDataBroker(session.getSALService(DataBrokerService.class));
         notificationService = session.getSALService(NotificationService.class);
         registerNotificationListener(AddMapping.class, new MapRegisterNotificationHandler());
         registerNotificationListener(RequestMapping.class, new MapRequestNotificationHandler());
@@ -284,6 +290,8 @@ public class LispMappingService extends AbstractBindingAwareProvider implements 
         @Override
         public void onNotification(AddMapping mapRegisterNotification) {
             MapNotify mapNotify = handleMapRegister(mapRegisterNotification.getMapRegister(), smr);
+            logger.trace("handleMapRegister()");
+            inventory.inventoryUpdate("lisp:1");
             if (mapNotify != null) {
                 TransportAddressBuilder tab = new TransportAddressBuilder();
                 tab.setIpAddress(mapRegisterNotification.getTransportAddress().getIpAddress());

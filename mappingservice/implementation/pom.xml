@@ -56,6 +56,8 @@
 							org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.transportaddress,
 							org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924,
 							org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev100924,
+							org.opendaylight.yang.gen.v1.urn.opendaylight.inventory.rev130819,
+							org.opendaylight.yang.gen.v1.urn.opendaylight.inventory.rev130819.nodes,
 							org.opendaylight.controller.sal.core,
 							org.apache.felix.dm,
 							org.apache.commons.lang3,
@@ -73,6 +75,7 @@
 							javax.crypto,
 							javax.crypto.spec,
 							org.opendaylight.controller.sal.binding.api,
+							org.opendaylight.controller.sal.binding.api.data,
 							org.opendaylight.yangtools.yang.binding,
 							org.opendaylight.yangtools.concepts
 						</Import-Package>
@@ -102,6 +105,10 @@
 		<dependency>
 			<groupId>org.opendaylight.controller</groupId>
 			<artifactId>sal-common-util</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller.model</groupId>
+			<artifactId>model-inventory</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.hamcrest</groupId>

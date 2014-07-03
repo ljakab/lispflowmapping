@@ -26,6 +26,7 @@
 		<yang.binding.version>0.6.1</yang.binding.version>
 		<yang.version>0.6.1</yang.version>
 		<yang.codegen.version>0.6.1</yang.codegen.version>
+                <controller.model.version>1.1-SNAPSHOT</controller.model.version>
 		<sonar.host.url>https://sonar.opendaylight.org/</sonar.host.url>
 		<sonar.branch>${user.name}-private-view</sonar.branch>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
@@ -185,6 +186,11 @@
 				<version>0.8.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
+				<groupId>org.opendaylight.controller.model</groupId>
+				<artifactId>model-inventory</artifactId>
+                                <version>${controller.model.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>4.8.1</version>
@@ -217,12 +223,12 @@
 			<dependency>
 				<groupId>org.opendaylight.controller</groupId>
 				<artifactId>sal-binding-api</artifactId>
-				<version>1.1-SNAPSHOT</version>
+                                <version>${controller.model.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.opendaylight.controller</groupId>
 				<artifactId>sal-common-util</artifactId>
-				<version>1.1-SNAPSHOT</version>
+                                <version>${controller.model.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.opendaylight.controller</groupId>

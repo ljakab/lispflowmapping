@@ -39,7 +39,7 @@ public class LispInventoryService {
         InstanceIdentifier<Nodes> nodesIdentifier = InstanceIdentifier.builder(Nodes.class).toInstance();
         if (dataBroker != null) {
             DataModificationTransaction transaction = dataBroker.beginTransaction();
-            transaction.putOperationalData(nodesIdentifier, node);
+            transaction.putOperationalData(nodesIdentifier.child(Node.class,node.getKey()), node);
             transaction.commit();
         } else {
             logger.warn("No data provider configured, could not add node");

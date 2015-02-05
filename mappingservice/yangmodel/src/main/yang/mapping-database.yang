@@ -1,0 +1,21 @@
+module mapping-database {
+
+    yang-version 1;
+    namespace "urn:opendaylight:params:xml:ns:yang:lispflowmapping:mapping-database";
+    prefix "mapping-database";
+
+    import lispflowmapping { prefix lfm; revision-date 2013-10-31; }
+
+    contact "Lorand Jakab <lojakab@cisco.com";
+
+    description
+        "An MD-SAL based implementation of a LISP Map-Server database";
+
+    revision "2014-12-09" {
+        description "Initial revision.";
+    }
+
+    container db-entry {
+        uses lfm:EidToLocatorRecord;
+    }
+}

@@ -273,40 +273,64 @@
        container LispAddressContainer{
                choice Address {
                			case No {
+               			    container NoAddress {
        						uses LispNoAddress;
+               			    }
        					}
                        case Ipv4 {
+                           container Ipv4Address {
        						uses LispIpv4Address;
+                           }
        					}
        					case Ipv6 {
+       					    container Ipv6Address {
        						uses LispIpv6Address;
+       					    }
        					}
 			       		case Mac {
+			       		    container MacAddress {
 			       			uses LispMacAddress;
+			       		    }
 			       		}
 			       		case DistinguishedName {
+			       		    container distinguishedName {
 							uses LispDistinguishedNameAddress;
+			       		    }
 			       		}
 			       		case AS {
+			       		    container AS {
 							uses LispASAddress;
+			       		    }
 			       		}
                        case LcafSegment {
+                           container LcafSegmentAddr {
                                uses LcafSegmentAddress;
+                           }
                        }
                        case LcafSourceDest {
+                           container LcafSourceDestAddr {
                                uses LcafSourceDestAddress;
+                           }
                        }
                        case LcafKeyValue {
+                           container LcafKeyValueAddressAddr {
                                uses LcafKeyValueAddress;
+                           }
                        }
                        case LcafList {
+                           container LcafListAddr {
                                uses LcafListAddress;
+                           }
                        }
                        case LcafApplicationData {
+                           container LcafApplicationDataAddr {
                                uses LcafApplicationDataAddress;
+                           }
                        }
                        case LcafTrafficEngineering {
+                           container LcafTrafficEngineeringAddr {
                                uses LcafTrafficEngineeringAddress;
+                           }
                        }
                }
        }

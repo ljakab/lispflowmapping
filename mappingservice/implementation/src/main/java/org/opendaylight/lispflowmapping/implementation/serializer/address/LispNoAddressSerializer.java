@@ -12,7 +12,7 @@ import java.nio.ByteBuffer;
 import org.opendaylight.lispflowmapping.type.AddressFamilyNumberEnum;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispAFIAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispNoAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.NoBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.no.NoAddressBuilder;
 
 public class LispNoAddressSerializer extends LispAddressSerializer {
 
@@ -37,7 +37,7 @@ public class LispNoAddressSerializer extends LispAddressSerializer {
 
     @Override
     protected LispNoAddress deserializeData(ByteBuffer buffer) {
-        return new NoBuilder().setAfi(AddressFamilyNumberEnum.NO_ADDRESS.getIanaCode()).build();
+        return new NoAddressBuilder().setAfi(AddressFamilyNumberEnum.NO_ADDRESS.getIanaCode()).build();
     }
 
     private interface Length {

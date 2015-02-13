@@ -16,7 +16,7 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LcafKeyValueAddres
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispAFIAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcafkeyvalueaddress.KeyBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcafkeyvalueaddress.ValueBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafKeyValueBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafkeyvalue.LcafKeyValueAddressAddrBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispsimpleaddress.PrimitiveAddress;
 
 public class LispKeyValueLCAFSerializer extends LispLCAFAddressSerializer {
@@ -49,7 +49,7 @@ public class LispKeyValueLCAFSerializer extends LispLCAFAddressSerializer {
     protected LcafKeyValueAddress deserializeData(ByteBuffer buffer, byte res2, short length) {
         LispAFIAddress keyAddress = LispAddressSerializer.getInstance().deserialize(buffer);
         LispAFIAddress valueAddress = LispAddressSerializer.getInstance().deserialize(buffer);
-        LcafKeyValueBuilder builder = new LcafKeyValueBuilder();
+        LcafKeyValueAddressAddrBuilder builder = new LcafKeyValueAddressAddrBuilder();
         builder.setKey(new KeyBuilder().setPrimitiveAddress((PrimitiveAddress) LispAFIConvertor.toPrimitive(keyAddress)).build());
         builder.setValue(new ValueBuilder().setPrimitiveAddress((PrimitiveAddress) LispAFIConvertor.toPrimitive(valueAddress)).build());
         builder.setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode());

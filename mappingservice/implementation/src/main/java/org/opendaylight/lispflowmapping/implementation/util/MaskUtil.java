@@ -29,11 +29,11 @@ public class MaskUtil {
     public static Address normalize(Address address, int mask) {
         try {
             if (address instanceof LispIpv4Address) {
-                return LispAFIConvertor.asIPAfiAddress(normalizeIP(Inet4Address.getByName(((LispIpv4Address) address).getIpv4Address().getValue()),
+                return (Address) LispAFIConvertor.asIPAfiAddress(normalizeIP(Inet4Address.getByName(((LispIpv4Address) address).getIpv4Address().getValue()),
                         mask).getHostAddress());
             }
             if (address instanceof LispIpv6Address) {
-                return LispAFIConvertor.asIPv6AfiAddress(normalizeIP(Inet6Address.getByName(((LispIpv6Address) address).getIpv6Address().getValue()),
+                return (Address) LispAFIConvertor.asIPv6AfiAddress(normalizeIP(Inet6Address.getByName(((LispIpv6Address) address).getIpv6Address().getValue()),
                         mask).getHostAddress());
             }
 

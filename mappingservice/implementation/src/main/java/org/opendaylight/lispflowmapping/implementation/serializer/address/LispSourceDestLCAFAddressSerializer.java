@@ -17,7 +17,7 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LcafSourceDestAddr
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispAFIAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcafsourcedestaddress.DstAddressBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcafsourcedestaddress.SrcAddressBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafSourceDestBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddrBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispsimpleaddress.PrimitiveAddress;
 
 public class LispSourceDestLCAFAddressSerializer extends LispLCAFAddressSerializer {
@@ -51,13 +51,12 @@ public class LispSourceDestLCAFAddressSerializer extends LispLCAFAddressSerializ
     }
 
     @Override
-    protected LcafSourceDestAddress deserializeData(ByteBuffer buffer, byte res2, short length) {
-        short res = buffer.getShort();
+    protected LcafSourceDestAddress deserializeData(ByteBuffer buffer, byte res, short length) {
         int srcMaskLength = ByteUtil.getUnsignedByte(buffer);
         int dstMaskLength = ByteUtil.getUnsignedByte(buffer);
         LispAFIAddress srcAddress = LispAddressSerializer.getInstance().deserialize(buffer);
         LispAFIAddress dstAddress = LispAddressSerializer.getInstance().deserialize(buffer);
-        LcafSourceDestBuilder builder = new LcafSourceDestBuilder();
+        LcafSourceDestAddrBuilder builder = new LcafSourceDestAddrBuilder();
         builder.setDstMaskLength((short) dstMaskLength).setSrcMaskLength((short) srcMaskLength);
         builder.setSrcAddress(new SrcAddressBuilder().setPrimitiveAddress((PrimitiveAddress) LispAFIConvertor.toPrimitive(srcAddress)).build());
         builder.setDstAddress(new DstAddressBuilder().setPrimitiveAddress((PrimitiveAddress) LispAFIConvertor.toPrimitive(dstAddress)).build());

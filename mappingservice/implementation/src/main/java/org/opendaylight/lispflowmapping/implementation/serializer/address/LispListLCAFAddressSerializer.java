@@ -18,7 +18,7 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LcafListAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispAFIAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcaflistaddress.Addresses;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcaflistaddress.AddressesBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafListBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcaflist.LcafListAddrBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispsimpleaddress.PrimitiveAddress;
 
 public class LispListLCAFAddressSerializer extends LispLCAFAddressSerializer {
@@ -57,7 +57,7 @@ public class LispListLCAFAddressSerializer extends LispLCAFAddressSerializer {
             length -= LispAddressSerializer.getInstance().getAddressSize((LispAFIAddress) address);
             addresses.add(new AddressesBuilder().setPrimitiveAddress((PrimitiveAddress) address).build());
         }
-        return new LcafListBuilder().setAddresses(addresses).setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode())
+        return new LcafListAddrBuilder().setAddresses(addresses).setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode())
                 .setLcafType((short) LispCanonicalAddressFormatEnum.LIST.getLispCode()).build();
     }
 }

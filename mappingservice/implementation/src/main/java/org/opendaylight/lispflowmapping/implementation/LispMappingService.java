@@ -50,7 +50,7 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.SendMapRequestInpu
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.LispAddressContainer;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.LispAddressContainerBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.Address;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv4Builder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv4.Ipv4AddressBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.mapnotifymessage.MapNotifyBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.mapreplymessage.MapReplyBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.maprequestmessage.MapRequestBuilder;
@@ -199,7 +199,7 @@ public class LispMappingService implements CommandProvider, IFlowMapping, Bindin
 
     public void _addDefaultPassword(final CommandInterpreter ci) {
         LispAddressContainerBuilder builder = new LispAddressContainerBuilder();
-        builder.setAddress((Address) (new Ipv4Builder().setIpv4Address(new Ipv4Address("0.0.0.0")).build()));
+        builder.setAddress((Address) (new Ipv4AddressBuilder().setIpv4Address(new Ipv4Address("0.0.0.0")).build()));
         addAuthenticationKey(builder.build(), 0, "password");
     }
 

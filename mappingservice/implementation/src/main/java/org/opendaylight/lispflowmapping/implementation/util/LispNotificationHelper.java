@@ -17,9 +17,8 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispAFIAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispDistinguishedNameAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispIpv4Address;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.LispAddressContainer;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.DistinguishedName;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv4;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafKeyValue;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.distinguishedname.DistinguishedName;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafkeyvalue.LcafKeyValueAddressAddr;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispsimpleaddress.PrimitiveAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.mapregisternotification.MapRegister;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.mapregisternotification.MapRegisterBuilder;
@@ -85,11 +84,11 @@ public class LispNotificationHelper {
     public static TransportAddress getTransportAddressFromContainer(LispAddressContainer container) {
         TransportAddressBuilder tab = new TransportAddressBuilder();
         LispAFIAddress address = LispAFIConvertor.toAFI(container);
-        if (address instanceof Ipv4) {
-            tab.setIpAddress(IpAddressBuilder.getDefaultInstance(((Ipv4) address).getIpv4Address().getValue()));
+        if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv4.Ipv4Address) {
+            tab.setIpAddress(IpAddressBuilder.getDefaultInstance(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv4.Ipv4Address) address).getIpv4Address().getValue()));
             tab.setPort(new PortNumber(LispMessage.PORT_NUM));
-        } else if (address instanceof LcafKeyValue) {
-            PrimitiveAddress primitiveAddress = ((LcafKeyValue) address).getValue().getPrimitiveAddress();
+        } else if (address instanceof LcafKeyValueAddressAddr) {
+            PrimitiveAddress primitiveAddress = ((LcafKeyValueAddressAddr) address).getValue().getPrimitiveAddress();
             if (primitiveAddress instanceof LispDistinguishedNameAddress) {
                 String value = ((LispDistinguishedNameAddress) primitiveAddress).getDistinguishedName();
                 String ip = value.split(":")[0];

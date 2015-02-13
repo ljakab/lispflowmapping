@@ -20,7 +20,7 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LcafTrafficEnginee
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispAFIAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcaftrafficengineeringaddress.Hops;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcaftrafficengineeringaddress.HopsBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafTrafficEngineeringBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcaftrafficengineering.LcafTrafficEngineeringAddrBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispsimpleaddress.PrimitiveAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.reencaphop.HopBuilder;
 
@@ -77,7 +77,7 @@ public class LispTrafficEngineeringLCAFAddressSerializer extends LispLCAFAddress
             length -= LispAddressSerializer.getInstance().getAddressSize((LispAFIAddress) address) + 2;
             hops.add(builder.build());
         }
-        return new LcafTrafficEngineeringBuilder().setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode())
+        return new LcafTrafficEngineeringAddrBuilder().setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode())
                 .setLcafType((short) LispCanonicalAddressFormatEnum.TRAFFIC_ENGINEERING.getLispCode()).setHops(hops).build();
     }
 

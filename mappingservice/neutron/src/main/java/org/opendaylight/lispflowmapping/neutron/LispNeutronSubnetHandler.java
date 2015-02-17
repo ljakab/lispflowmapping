@@ -19,7 +19,7 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispAFIAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.LispAddressContainer;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.LispAddressContainerBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.Address;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv4Builder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv4.Ipv4AddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address;
 
 /**
@@ -68,7 +68,7 @@ public class LispNeutronSubnetHandler extends LispNeutronService implements INeu
         if ( (new Integer(6)).equals(subnet.getIpVersion()) )
         	ianaCode = 2;
 
-        LispAFIAddress lispAddress = new Ipv4Builder().setIpv4Address(new Ipv4Address(info.getNetworkAddress())).setAfi(ianaCode).build();
+        LispAFIAddress lispAddress = new Ipv4AddressBuilder().setIpv4Address(new Ipv4Address(info.getNetworkAddress())).setAfi(ianaCode).build();
         LispAddressContainer addressContainer =	new LispAddressContainerBuilder().setAddress((Address) lispAddress).build();
 
         try{
@@ -136,7 +136,7 @@ public class LispNeutronSubnetHandler extends LispNeutronService implements INeu
         if ( (new Integer(6)).equals(subnet.getIpVersion()) )
         	ianaCode = 2;
 
-        LispAFIAddress lispAddress = new Ipv4Builder().setIpv4Address(new Ipv4Address(info.getNetworkAddress())).setAfi(ianaCode).build();
+        LispAFIAddress lispAddress = new Ipv4AddressBuilder().setIpv4Address(new Ipv4Address(info.getNetworkAddress())).setAfi(ianaCode).build();
         LispAddressContainer addressContainer = new LispAddressContainerBuilder().setAddress((Address) lispAddress).build();
 
         // if subnet does not exist in MapServer, return error
@@ -179,7 +179,7 @@ public class LispNeutronSubnetHandler extends LispNeutronService implements INeu
         if ( (new Integer(6)).equals(subnet.getIpVersion()) )
         	ianaCode = 2;
 
-        LispAFIAddress lispAddress = new Ipv4Builder().setIpv4Address(new Ipv4Address(info.getNetworkAddress())).setAfi(ianaCode).build();
+        LispAFIAddress lispAddress = new Ipv4AddressBuilder().setIpv4Address(new Ipv4Address(info.getNetworkAddress())).setAfi(ianaCode).build();
         LispAddressContainer addressContainer = new LispAddressContainerBuilder().setAddress((Address) lispAddress).build();
 
         try{

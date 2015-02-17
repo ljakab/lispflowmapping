@@ -46,11 +46,8 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.eidrecords.EidReco
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.eidtolocatorrecords.EidToLocatorRecord;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.eidtolocatorrecords.EidToLocatorRecordBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.LispAddressContainer;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.LispAddressContainerBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv4;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv4Builder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv6;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv6Builder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv4.Ipv4AddressBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv6.Ipv6AddressBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.locatorrecords.LocatorRecord;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.locatorrecords.LocatorRecordBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.mapnotifymessage.MapNotifyBuilder;
@@ -167,15 +164,15 @@ public class LispSouthboundServiceTest extends BaseTestCase {
     }
 
     private LispAddressContainer getIPContainer(String ip) {
-        return new LispAddressContainerBuilder().setAddress(getIP(ip)).build();
+        return LispAFIConvertor.toContainer(getIP(ip));
     }
 
-    private Ipv4 getIP(String ip) {
-        return new Ipv4Builder().setIpv4Address(new Ipv4Address(ip)).setAfi((short) 1).build();
+    private org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv4.Ipv4Address getIP(String ip) {
+        return new Ipv4AddressBuilder().setIpv4Address(new Ipv4Address(ip)).setAfi((short) 1).build();
     }
 
-    private Ipv6 getIPV6(String ip) {
-        return new Ipv6Builder().setIpv6Address(new Ipv6Address(ip)).setAfi((short) 2).build();
+    private org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv6.Ipv6Address getIPV6(String ip) {
+        return new Ipv6AddressBuilder().setIpv6Address(new Ipv6Address(ip)).setAfi((short) 2).build();
     }
 
     @Test
@@ -431,8 +428,8 @@ public class LispSouthboundServiceTest extends BaseTestCase {
         List<EidRecord> eids = lastMapRequest().getEidRecord();
         assertEquals(1, eids.size());
         LispAFIAddress lispAddress = LispAFIConvertor.toAFI(eids.get(0).getLispAddressContainer());
-        assertTrue(lispAddress instanceof Ipv4);
-        assertEquals(getIP("1.2.3.4"), ((Ipv4) lispAddress));
+        assertTrue(lispAddress instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv4.Ipv4Address);
+        assertEquals(getIP("1.2.3.4"), ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv4.Ipv4Address) lispAddress));
         assertEquals((byte) 0x20, eids.get(0).getMask().byteValue());
         assertEquals(0x3d8d2acd39c8d608L, lastMapRequest().getNonce().longValue());
         // assertEquals(AddressFamilyNumberEnum.RESERVED,

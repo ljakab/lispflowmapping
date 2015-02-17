@@ -51,7 +51,8 @@ public class LispSourceDestLCAFAddressSerializer extends LispLCAFAddressSerializ
     }
 
     @Override
-    protected LcafSourceDestAddress deserializeData(ByteBuffer buffer, byte res, short length) {
+    protected LcafSourceDestAddress deserializeData(ByteBuffer buffer, byte res2, short length) {
+        short res = buffer.getShort();
         int srcMaskLength = ByteUtil.getUnsignedByte(buffer);
         int dstMaskLength = ByteUtil.getUnsignedByte(buffer);
         LispAFIAddress srcAddress = LispAddressSerializer.getInstance().deserialize(buffer);

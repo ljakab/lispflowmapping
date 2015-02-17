@@ -38,7 +38,7 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.MapRequest;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.eidrecords.EidRecordBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.eidtolocatorrecords.EidToLocatorRecord;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.LispAddressContainer;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafkeyvalue.LcafKeyValueAddressAddr;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafKeyValue;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispsimpleaddress.primitiveaddress.DistinguishedName;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.locatorrecords.LocatorRecord;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.mapnotifymessage.MapNotifyBuilder;
@@ -203,10 +203,10 @@ public class MapServer extends AbstractLispComponent implements IMapServerAsync 
     }
 
     private String getLocatorKey(LocatorRecord locatorRecord) {
-        if (locatorRecord.getLispAddressContainer().getAddress() instanceof LcafKeyValueAddressAddr) {
-            LcafKeyValueAddressAddr keyVal = (LcafKeyValueAddressAddr) locatorRecord.getLispAddressContainer().getAddress();
-            if (keyVal.getKey().getPrimitiveAddress() instanceof DistinguishedName) {
-                return ((DistinguishedName) keyVal.getKey().getPrimitiveAddress()).getDistinguishedName();
+        if (locatorRecord.getLispAddressContainer().getAddress() instanceof LcafKeyValue) {
+            LcafKeyValue keyVal = (LcafKeyValue) locatorRecord.getLispAddressContainer().getAddress();
+            if (keyVal.getLcafKeyValueAddressAddr().getKey().getPrimitiveAddress() instanceof DistinguishedName) {
+                return ((DistinguishedName) keyVal.getLcafKeyValueAddressAddr().getKey().getPrimitiveAddress()).getDistinguishedName();
             }
         }
         if (shouldOverwrite()) {

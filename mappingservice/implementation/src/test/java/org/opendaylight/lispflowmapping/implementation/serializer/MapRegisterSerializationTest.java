@@ -27,7 +27,7 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.EidToLocatorRecord
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.MapRegister;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.eidtolocatorrecords.EidToLocatorRecord;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.eidtolocatorrecords.EidToLocatorRecordBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.NoBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.no.NoAddressBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.locatorrecords.LocatorRecord;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.mapregisternotification.MapRegisterBuilder;
 
@@ -159,7 +159,7 @@ public class MapRegisterSerializationTest extends BaseTestCase {
         mrBuilder.getEidToLocatorRecord().add(new EidToLocatorRecordBuilder().setLispAddressContainer(null).build());
         mrBuilder.getEidToLocatorRecord().add(
                 new EidToLocatorRecordBuilder().setLispAddressContainer(
-                        LispAFIConvertor.toContainer(new NoBuilder().setAfi(AddressFamilyNumberEnum.NO_ADDRESS.getIanaCode()).build())).build());
+                        LispAFIConvertor.toContainer(new NoAddressBuilder().setAfi(AddressFamilyNumberEnum.NO_ADDRESS.getIanaCode()).build())).build());
 
         ByteBuffer bb = MapRegisterSerializer.getInstance().serialize(mrBuilder.build());
         bb.position(bb.position() + 16); // jump to first record prefix AFI

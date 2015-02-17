@@ -54,12 +54,12 @@ public class LocatorRecordSerializer {
         replyBuffer.put((byte) (ByteUtil.boolToBit(BooleanUtils.isTrue(record.isLocalLocator()), Flags.LOCAL_LOCATOR) | //
                 ByteUtil.boolToBit(BooleanUtils.isTrue(record.isRlocProbed()), Flags.RLOC_PROBED) | //
                 ByteUtil.boolToBit(BooleanUtils.isTrue(record.isRouted()), Flags.ROUTED)));
-        LispAddressSerializer.getInstance().serialize(replyBuffer, (LispAFIAddress) record.getLispAddressContainer().getAddress());
+        LispAddressSerializer.getInstance().serialize(replyBuffer, LispAFIConvertor.toAFI(record.getLispAddressContainer()));
     }
 
     public int getSerializationSize(LocatorRecord record) {
         return Length.HEADER_SIZE
-                + LispAddressSerializer.getInstance().getAddressSize((LispAFIAddress) record.getLispAddressContainer().getAddress());
+                + LispAddressSerializer.getInstance().getAddressSize(LispAFIConvertor.toAFI(record.getLispAddressContainer()));
     }
 
     private interface Flags {

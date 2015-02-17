@@ -16,11 +16,13 @@ import java.nio.ByteBuffer;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispIpv4Address;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispIpv6Address;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.Address;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv4;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv6;
 
 public class MaskUtil {
 
     public static boolean isMaskable(Address address) {
-        if (address instanceof LispIpv4Address || address instanceof LispIpv6Address) {
+        if (address instanceof Ipv4 || address instanceof Ipv6) {
             return true;
         }
         return false;

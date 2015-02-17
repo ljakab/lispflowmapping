@@ -78,7 +78,7 @@ public class EidToLocatorRecordSerializer {
         replyBuffer.position(replyBuffer.position() + Length.RESERVED);
         replyBuffer.putShort(NumberUtil.asShort(record.getMapVersion()));
         if (record.getLispAddressContainer() != null && record.getLispAddressContainer().getAddress() != null) {
-            LispAddressSerializer.getInstance().serialize(replyBuffer, (LispAFIAddress) record.getLispAddressContainer().getAddress());
+            LispAddressSerializer.getInstance().serialize(replyBuffer, LispAFIConvertor.toAFI(record.getLispAddressContainer()));
         }
 
         if (record.getLocatorRecord() != null) {
@@ -91,7 +91,7 @@ public class EidToLocatorRecordSerializer {
     public int getSerializationSize(EidToLocatorRecord record) {
         int size = Length.HEADER_SIZE;
         if (record.getLispAddressContainer() != null) {
-            size += LispAddressSerializer.getInstance().getAddressSize((LispAFIAddress) record.getLispAddressContainer().getAddress());
+            size += LispAddressSerializer.getInstance().getAddressSize((LispAFIConvertor.toAFI(record.getLispAddressContainer())));
         }
         if (record.getLocatorRecord() != null) {
             for (LocatorRecord locatorRecord : record.getLocatorRecord()) {

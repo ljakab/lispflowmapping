@@ -89,11 +89,11 @@ public class LispAFIConvertor {
 
     public static LispAddressContainer toContainer(InetAddress address) {
         if (address instanceof Inet4Address) {
-            return new LispAddressContainerBuilder().setAddress((Address) asIPAfiAddress(address.getHostAddress())).build();
+            return toContainer(asIPAfiAddress(address.getHostAddress()));
         }
 
         if (address instanceof Inet6Address) {
-            return new LispAddressContainerBuilder().setAddress((Address) asIPv6AfiAddress(address.getHostAddress())).build();
+            return toContainer(asIPv6AfiAddress(address.getHostAddress()));
         }
 
         return null;
@@ -104,79 +104,29 @@ public class LispAFIConvertor {
         LispAFIAddress addr = null;
 
         if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv4) {
-            addr = new org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv4.Ipv4AddressBuilder()
-                    .setIpv4Address(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv4) address).getIpv4Address().getIpv4Address())
-                    .setAfi(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv4) address).getIpv4Address().getAfi())
-                    .build();
+            return ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv4) address).getIpv4Address();
         } else if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv6) {
-            addr = new org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv6.Ipv6AddressBuilder()
-                    .setIpv6Address(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv6) address).getIpv6Address().getIpv6Address())
-                    .setAfi(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv6) address).getIpv6Address().getAfi())
-                    .build();
+            return ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv6) address).getIpv6Address();
         } else if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafTrafficEngineering) {
-            addr = new org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcaftrafficengineering.LcafTrafficEngineeringAddrBuilder()
-                    .setLcafType(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcaftrafficengineering.LcafTrafficEngineeringAddr) address).getLcafType())
-                    .setHops(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcaftrafficengineering.LcafTrafficEngineeringAddr) address).getHops())
-                    .setAfi(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcaftrafficengineering.LcafTrafficEngineeringAddr) address).getAfi())
-                    .build();
+            return ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafTrafficEngineering) address).getLcafTrafficEngineeringAddr();
         } else if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.AS) {
-            addr = new org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.as.ASBuilder()
-                    .setAS(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.as.AS) address).getAS())
-                    .setAfi(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.AS) address).getAS().getAfi())
-                    .build();
+            return ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.AS) address).getAS();
         } else if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.DistinguishedName) {
-            addr = new org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.distinguishedname.DistinguishedNameBuilder()
-                    .setDistinguishedName(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.distinguishedname.DistinguishedName) address).getDistinguishedName())
-                    .setAfi(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.distinguishedname.DistinguishedName) address).getAfi())
-                    .build();
+            return ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.DistinguishedName) address).getDistinguishedName();
         } else if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafApplicationData) {
-            addr = new org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafapplicationdata.LcafApplicationDataAddrBuilder()
-                    .setLcafType(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafapplicationdata.LcafApplicationDataAddr) address).getLcafType())
-                    .setAddress(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafapplicationdata.LcafApplicationDataAddr) address).getAddress())
-                    .setAfi(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafapplicationdata.LcafApplicationDataAddr) address).getAfi())
-                    .setIpTos(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafapplicationdata.LcafApplicationDataAddr) address).getIpTos())
-                    .setLocalPort(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafapplicationdata.LcafApplicationDataAddr) address).getLocalPort())
-                    .setRemotePort(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafapplicationdata.LcafApplicationDataAddr) address).getRemotePort())
-                    .setProtocol(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafapplicationdata.LcafApplicationDataAddr) address).getProtocol())
-                    .build();
+            return ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafApplicationData) address).getLcafApplicationDataAddr();
         } else if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafKeyValue) {
-            addr = new org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafkeyvalue.LcafKeyValueAddressAddrBuilder()
-                    .setLcafType(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafkeyvalue.LcafKeyValueAddressAddr) address).getLcafType())
-                    .setKey(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafkeyvalue.LcafKeyValueAddressAddr) address).getKey())
-                    .setValue(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafkeyvalue.LcafKeyValueAddressAddr) address).getValue())
-                    .setAfi(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafkeyvalue.LcafKeyValueAddressAddr) address).getAfi())
-                    .build();
+            return ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafKeyValue) address).getLcafKeyValueAddressAddr();
         } else if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafList) {
-            addr = new org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcaflist.LcafListAddrBuilder()
-                    .setLcafType(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcaflist.LcafListAddr) address).getLcafType())
-                    .setAddresses(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcaflist.LcafListAddr) address).getAddresses())
-                    .setAfi(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcaflist.LcafListAddr) address).getAfi())
-                    .build();
+            return ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafList) address).getLcafListAddr();
         } else if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafSegment) {
-            addr = new org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsegment.LcafSegmentAddrBuilder()
-                    .setLcafType(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsegment.LcafSegmentAddr) address).getLcafType())
-                    .setAddress(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsegment.LcafSegmentAddr) address).getAddress())
-                    .setInstanceId(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsegment.LcafSegmentAddr) address).getInstanceId())
-                    .setAfi(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsegment.LcafSegmentAddr) address).getAfi())
-                    .build();
+            return ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafSegment) address).getLcafSegmentAddr();
         } else if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafSourceDest) {
-            addr = new org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddrBuilder()
-                    .setLcafType(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddr) address).getLcafType())
-                    .setDstAddress(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddr) address).getDstAddress())
-                    .setDstMaskLength(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddr) address).getDstMaskLength())
-                    .setSrcAddress(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddr) address).getSrcAddress())
-                    .setSrcMaskLength(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddr) address).getSrcMaskLength())
-                    .setAfi(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddr) address).getAfi())
-                    .build();
+            return ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafSourceDest) address).getLcafSourceDestAddr();
         } else if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Mac) {
-            addr = new org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.mac.MacAddressBuilder()
-                    .setMacAddress(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.mac.MacAddress) address).getMacAddress())
-                    .setAfi(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Mac) address).getMacAddress().getAfi())
-                    .build();
+            return ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Mac) address).getMacAddress();
         } else if (address instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.No) {
-            addr = new org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.no.NoAddressBuilder()
-                    .setAfi(((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.No) address).getNoAddress().getAfi())
-                    .build();
+            return ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.No) address).getNoAddress();
         }
 
         return addr;

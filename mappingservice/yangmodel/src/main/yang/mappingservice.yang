@@ -17,6 +17,8 @@
                revision-date 2010-09-24;
        }
 
+    import yang-ext { prefix ext; revision-date "2013-07-09"; }
+
     organization "LISP Flow Mapping";
 
     contact
@@ -29,6 +31,24 @@
     revision "2013-10-31" {
       description
         "mapping service";
+    }
+
+    typedef iid-uri {
+        description "IID as a string lookup key in a URI";
+        type inet:uri;
+    }
+
+    typedef eid-uri {
+        description "EID as a string lookup key in a URI";
+        type inet:uri;
+    }
+
+    identity instance-id-context {
+        description "A classifier for instance-id elements which allows direct access to a particular element in the data tree.";
+    }
+
+    identity eid-context {
+        description "A classifier for endpoint-id elements which allows direct access to a particular element in the data tree.";
     }
 
     grouping TransportAddress{
@@ -379,6 +399,10 @@
     }
 
     grouping EidToLocatorRecord {
+        leaf eid {
+            type eid-uri;
+        }
+
     	leaf recordTtl {
     		type int32;
     	}
@@ -598,6 +622,30 @@
 
     notification xtrReplyMapping {
     	uses MapReplyNotification;
+    }
+
+    grouping db-instance-id {
+        description "Describes the mappings belonging to the same Instance ID";
+        leaf iid {
+            description "The 24-bit Instance ID";
+            type iid-uri;
+        }
+        list eid {
+            description "A list of EID-to-RLOC mappings within the same Instance ID";
+            key "eid";
+            ext:context-instance "eid-context";
+            uses EidToLocatorRecord;
+        }
+    }
+
+    container mapping-database {
+        description "The LISP EID-to-RLOC mapping database";
+        list instance-id {
+            description "A list of LISP Instance IDs";
+            key "iid";
+            ext:context-instance instance-id-context";
+            uses db-instance-id;
+        }
     }
 }
 

@@ -8,13 +8,15 @@
 
 package org.opendaylight.lispflowmapping.implementation;
 
+import java.util.concurrent.Future;
+
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.osgi.framework.console.CommandInterpreter;
 import org.eclipse.osgi.framework.console.CommandProvider;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker;
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ConsumerContext;
-import org.opendaylight.controller.sal.binding.api.BindingAwareConsumer;
+import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.sal.binding.api.BindingAwareProvider;
 import org.opendaylight.controller.sal.binding.api.NotificationListener;
 import org.opendaylight.controller.sal.binding.api.NotificationService;
 import org.opendaylight.lispflowmapping.implementation.config.ConfigIni;
@@ -35,6 +37,7 @@ import org.opendaylight.lispflowmapping.interfaces.lisp.IMapRequestResultHandler
 import org.opendaylight.lispflowmapping.interfaces.lisp.IMapResolverAsync;
 import org.opendaylight.lispflowmapping.interfaces.lisp.IMapServerAsync;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.AddMapping;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.EidToLocatorRecord;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispflowmappingService;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.MapNotify;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.MapRegister;
@@ -53,17 +56,20 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.mapreplymessage.Ma
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.maprequestmessage.MapRequestBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.transportaddress.TransportAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.transportaddress.TransportAddressBuilder;
+import org.opendaylight.yang.gen.v1.mapping.database.rev141209.AddMappingInput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev141209.MappingDatabaseService;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv6Address;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.PortNumber;
 import org.opendaylight.yangtools.yang.binding.Notification;
+import org.opendaylight.yangtools.yang.common.RpcResult;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LispMappingService implements CommandProvider, IFlowMapping, BindingAwareConsumer, //
-        IMapRequestResultHandler, IMapNotifyHandler {
+public class LispMappingService implements CommandProvider, IFlowMapping, BindingAwareProvider, //
+        IMapRequestResultHandler, IMapNotifyHandler, MappingDatabaseService {
     protected static final Logger logger = LoggerFactory.getLogger(LispMappingService.class);
 
     private static final ConfigIni configIni = new ConfigIni();
@@ -79,7 +85,7 @@ public class LispMappingService implements CommandProvider, IFlowMapping, Bindin
 
     private LispflowmappingService lispSB = null;
 
-    private ConsumerContext session;
+    private ProviderContext session;
 
     private NotificationService notificationService;
 
@@ -98,7 +104,7 @@ public class LispMappingService implements CommandProvider, IFlowMapping, Bindin
     void setBindingAwareBroker(BindingAwareBroker bindingAwareBroker) {
         logger.trace("BindingAwareBroker set!");
         BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
-        bindingAwareBroker.registerConsumer(this, bundleContext);
+        bindingAwareBroker.registerProvider(this, bundleContext);
     }
 
     void unsetBindingAwareBroker(BindingAwareBroker bindingAwareBroker) {
@@ -268,11 +274,13 @@ public class LispMappingService implements CommandProvider, IFlowMapping, Bindin
         return shouldAuthenticate;
     }
 
-    public void onSessionInitialized(ConsumerContext session) {
+    @Override
+    public void onSessionInitiated(ProviderContext session) {
         logger.info("Lisp Consumer session initialized!");
         notificationService = session.getSALService(NotificationService.class);
         registerNotificationListener(AddMapping.class, new MapRegisterNotificationHandler());
         registerNotificationListener(RequestMapping.class, new MapRequestNotificationHandler());
+        session.addRpcImplementation(MappingDatabaseService.class, this);
         this.session = session;
     }
 
@@ -358,6 +366,17 @@ public class LispMappingService implements CommandProvider, IFlowMapping, Bindin
     @Override
     public void setOverwrite(boolean overwrite) {
         mapServer.setOverwrite(overwrite);
+    }
+
+    @Override
+    public Future<RpcResult<Void>> addMapping(AddMappingInput input) {
+        logger.info("addMapping RPC called");
+        if (input instanceof EidToLocatorRecord) {
+            logger.info("addMapping(EidToLocatorRecord) received");
+        }
+        logger.info("Request received to add the following mapping: " + input.toString());
+
+        return null;
     }
 
 }

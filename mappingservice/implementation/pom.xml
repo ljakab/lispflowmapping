@@ -96,6 +96,7 @@
               org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.mapreplynotification,
               org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.reencaphop,
               org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.transportaddress,
+              org.opendaylight.yang.gen.v1.mapping.database.rev141209,
               org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924,
               org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev100924,
               org.opendaylight.controller.sal.core,

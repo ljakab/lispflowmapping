@@ -1,7 +1,7 @@
 module mapping-database {
 
     yang-version 1;
-    namespace "urn:opendaylight:params:xml:ns:yang:lispflowmapping:mapping-database";
+    namespace "mapping-database";
     prefix "mapping-database";
 
     import lispflowmapping { prefix lfm; revision-date 2013-10-31; }
@@ -15,7 +15,9 @@ module mapping-database {
         description "Initial revision.";
     }
 
-    container db-entry {
-        uses lfm:EidToLocatorRecord;
+    rpc add-mapping {
+        input {
+            uses lfm:EidToLocatorRecord;
+        }
     }
 }

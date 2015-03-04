@@ -18,7 +18,6 @@
     <module>commons/build_tools</module>
     <module>commons/unittest_tools</module>
     <module>mappingservice</module>
-    <module>distribution</module>
     <module>features</module>
     <module>artifacts</module>
     <module>distribution-karaf</module>

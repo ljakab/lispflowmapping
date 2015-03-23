@@ -11,6 +11,8 @@ package org.opendaylight.lispflowmapping.prefixutil;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Arrays;
 
 import com.google.common.base.Preconditions;
 import com.google.common.net.InetAddresses;
@@ -70,6 +72,25 @@ public class InetPrefix {
         this.prefixLength = prefixLength;
     }
 
+    public InetPrefix(byte[] bytes) {
+        Preconditions.checkArgument(bytes.length <= 4, "Only IPv4 supported");
+
+        this.prefixLength = (short)(bytes.length * 8);
+        byte[] ipv4 = new byte[4];
+        for (int i=0; i<bytes.length; i++) {
+            ipv4[i] = bytes[i];
+        }
+        for (int i=bytes.length; i<4; i++) {
+            ipv4[i] = 0;
+        }
+        try {
+            this.networkAddress = InetAddress.getByAddress(ipv4);
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Checks is the address passed as the argument is matched by the prefix
      * on which the method is called
@@ -79,6 +100,14 @@ public class InetPrefix {
      */
     public boolean matchedBy(InetAddress addr) {
         return false;
+    }
+
+    public byte[] getByteArray() {
+        if ((int)(prefixLength % Byte.SIZE) == 0) {
+            int size = (int)(prefixLength / Byte.SIZE);
+            return Arrays.copyOfRange(networkAddress.getAddress(), 0, size-1);
+        }
+        return null;
     }
 
     /**
@@ -146,5 +175,13 @@ public class InetPrefix {
             return InetAddresses.toAddrString(networkAddress);
         }
         return InetAddresses.toAddrString(networkAddress) + "/" + prefixLength;
+    }
+
+    public static void toStringBinary(InetPrefix prefix) {
+        byte [] bytes = prefix.getByteArray();
+        for (int i = 0; i < bytes.length; i++) {
+            System.out.print(String.format("%8s", Integer.toBinaryString(bytes[i] & 0xFF)).replace(' ', '0'));
+        }
+        System.out.println("");
     }
 }

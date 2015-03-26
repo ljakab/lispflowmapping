@@ -370,11 +370,11 @@ public class LispMappingService implements CommandProvider, IFlowMapping, Bindin
 
     @Override
     public Future<RpcResult<Void>> addMapping(AddMappingInput input) {
-        logger.info("addMapping RPC called");
+        LOG.info("addMapping RPC called");
         if (input instanceof EidToLocatorRecord) {
-            logger.info("addMapping(EidToLocatorRecord) received");
+            LOG.info("addMapping(EidToLocatorRecord) received");
         }
-        logger.info("Request received to add the following mapping: " + input.toString());
+        LOG.info("Request received to add the following mapping: " + input.toString());
 
         return null;
     }

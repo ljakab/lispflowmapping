@@ -24,26 +24,16 @@
   </modules>
 
   <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <!-- we are overriding the default version of this plugin here... not sure why. -->
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>2.8</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
     <plugins>
       <plugin>
         <!-- In this project we want to automatically sort all poms, thus we
              add the invocation of this plugin to the root parent. Configuration is in
-             the ODL parent. -->
+             odlparent. -->
         <groupId>com.google.code.sortpom</groupId>
         <artifactId>maven-sortpom-plugin</artifactId>
       </plugin>
       <plugin>
-        <!-- Check for coding style violations.  Configuration in the parent pom. -->
+        <!-- Check for coding style violations.  Configuration in odlparent. -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
       </plugin>

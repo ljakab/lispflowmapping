@@ -22,13 +22,13 @@ import org.opendaylight.lispflowmapping.implementation.lisp.exception.LispSerial
 import org.opendaylight.lispflowmapping.implementation.util.LispAFIConvertor;
 import org.opendaylight.lispflowmapping.tools.junit.BaseTestCase;
 import org.opendaylight.lispflowmapping.type.AddressFamilyNumberEnum;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.EidToLocatorRecord.Action;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.MapNotify;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.eidtolocatorrecords.EidToLocatorRecord;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.eidtolocatorrecords.EidToLocatorRecordBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.no.NoAddressBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.locatorrecords.LocatorRecord;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.mapnotifymessage.MapNotifyBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.EidToLocatorRecord.Action;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.MapNotify;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecord;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecordBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.no.NoAddressBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.locatorrecords.LocatorRecord;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.mapnotifymessage.MapNotifyBuilder;
 
 public class MapNotifySerializationTest extends BaseTestCase {
 

@@ -4,7 +4,7 @@ module mapping-database {
     namespace "mapping-database";
     prefix "mapping-database";
 
-    import lispflowmapping { prefix lfm; revision-date 2013-10-31; }
+    import lispflowmapping { prefix lfm; revision-date 2015-03-14; }
 
     contact "Lorand Jakab <lojakab@cisco.com";
 

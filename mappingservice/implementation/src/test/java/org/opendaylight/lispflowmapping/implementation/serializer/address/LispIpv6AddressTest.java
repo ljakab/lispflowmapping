@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.opendaylight.lispflowmapping.implementation.util.LispAFIConvertor;
 import org.opendaylight.lispflowmapping.tools.junit.BaseTestCase;
 import org.opendaylight.lispflowmapping.type.AddressFamilyNumberEnum;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.ipv6.Ipv6Address;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv6.Ipv6Address;
 
 public class LispIpv6AddressTest extends BaseTestCase {
 

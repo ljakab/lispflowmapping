@@ -10,11 +10,11 @@ package org.opendaylight.lispflowmapping.implementation.util;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.MapRequest;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.Address;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv4;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv6;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.maprequest.ItrRloc;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.MapRequest;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.Address;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Ipv4;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Ipv6;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequest.ItrRloc;
 
 public class MapRequestUtil {
     public static InetAddress selectItrRloc(MapRequest request) {

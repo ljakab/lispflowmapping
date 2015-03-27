@@ -18,10 +18,10 @@ import org.opendaylight.lispflowmapping.implementation.lisp.exception.LispSerial
 import org.opendaylight.lispflowmapping.tools.junit.BaseTestCase;
 import org.opendaylight.lispflowmapping.type.AddressFamilyNumberEnum;
 import org.opendaylight.lispflowmapping.type.LispCanonicalAddressFormatEnum;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LcafListAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispAFIAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispDistinguishedNameAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.distinguishedname.DistinguishedNameBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LcafListAddress;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispAFIAddress;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispDistinguishedNameAddress;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.distinguishedname.DistinguishedNameBuilder;
 
 public class LispDistinguishedNameAddressSerializerTest extends BaseTestCase {
 

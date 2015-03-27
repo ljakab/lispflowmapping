@@ -18,14 +18,14 @@ import org.opendaylight.lispflowmapping.type.LispCanonicalAddressFormatEnum;
 import org.opendaylight.lispflowmapping.type.lisp.address.LispAddress;
 import org.opendaylight.lispflowmapping.type.lisp.address.LispAddressGeneric;
 import org.opendaylight.lispflowmapping.type.lisp.address.LispIpv4Address;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispAFIAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcafsourcedestaddress.DstAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcafsourcedestaddress.DstAddressBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcafsourcedestaddress.SrcAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcafsourcedestaddress.SrcAddressBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.LispAddressContainer;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.Ipv4Builder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.LcafSourceDestBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispAFIAddress;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafsourcedestaddress.DstAddress;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafsourcedestaddress.DstAddressBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafsourcedestaddress.SrcAddress;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafsourcedestaddress.SrcAddressBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.LispAddressContainer;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Ipv4Builder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.LcafSourceDestBuilder;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address;
 
 
@@ -127,8 +127,8 @@ public class TransformerTest extends BaseTestCase{
 
     	LispAFIAddress lispAFIAddressOut = (LispAFIAddress) lispAddressContainerOut.getAddress();
 
-        org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispIpv4Address lispIpv4AddressOut;
-        lispIpv4AddressOut = (org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispIpv4Address) lispAFIAddressOut;
+        org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispIpv4Address lispIpv4AddressOut;
+        lispIpv4AddressOut = (org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispIpv4Address) lispAFIAddressOut;
 
 
     	assertEquals(ipv4AddressIn.getValue(),
@@ -180,16 +180,16 @@ public class TransformerTest extends BaseTestCase{
     	LispAFIAddress lispAFIAddressOut = (LispAFIAddress) lispAddressContainerOut.getAddress();
 
 
-    	org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LcafSourceDestAddress lcafSourceDestAddressOut;
-		lcafSourceDestAddressOut = (org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LcafSourceDestAddress) lispAFIAddressOut;
+    	org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LcafSourceDestAddress lcafSourceDestAddressOut;
+		lcafSourceDestAddressOut = (org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LcafSourceDestAddress) lispAFIAddressOut;
 
 		Ipv4Address ipv4AddressSrcOut
-			= ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispsimpleaddress.primitiveaddress.Ipv4)
+			= ((org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4)
 					lcafSourceDestAddressOut.getSrcAddress().getPrimitiveAddress())
 					.getIpv4Address();
 
 		Ipv4Address ipv4AddressDstOut
-		= ((org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispsimpleaddress.primitiveaddress.Ipv4)
+		= ((org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4)
 				lcafSourceDestAddressOut.getDstAddress().getPrimitiveAddress())
 				.getIpv4Address();
 

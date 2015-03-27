@@ -13,12 +13,12 @@ import org.opendaylight.lispflowmapping.implementation.util.ByteUtil;
 import org.opendaylight.lispflowmapping.implementation.util.LispAFIConvertor;
 import org.opendaylight.lispflowmapping.type.AddressFamilyNumberEnum;
 import org.opendaylight.lispflowmapping.type.LispCanonicalAddressFormatEnum;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LcafSourceDestAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.LispAFIAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcafsourcedestaddress.DstAddressBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lcafsourcedestaddress.SrcAddressBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddrBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.lispsimpleaddress.PrimitiveAddress;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LcafSourceDestAddress;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispAFIAddress;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafsourcedestaddress.DstAddressBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafsourcedestaddress.SrcAddressBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddrBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.PrimitiveAddress;
 
 public class LispSourceDestLCAFAddressSerializer extends LispLCAFAddressSerializer {
 

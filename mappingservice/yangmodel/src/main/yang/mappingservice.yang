@@ -33,6 +33,14 @@
         "mapping service";
     }
 
+    typedef mapping-origin {
+        description "The originating entity of an EID-to-RLOC mapping";
+        type enumeration {
+            enum northbound;
+            enum southbound;
+        }
+    }
+
     typedef iid-uri {
         description "IID as a string lookup key in a URI";
         type inet:uri;
@@ -401,6 +409,10 @@
     grouping EidToLocatorRecord {
         leaf eid {
             type eid-uri;
+        }
+
+        leaf origin {
+            type mapping-origin;
         }
 
     	leaf recordTtl {

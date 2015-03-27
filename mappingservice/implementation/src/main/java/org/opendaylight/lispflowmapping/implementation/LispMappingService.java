@@ -56,8 +56,13 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.mapreplymessage.Ma
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.maprequestmessage.MapRequestBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.transportaddress.TransportAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev131031.transportaddress.TransportAddressBuilder;
-import org.opendaylight.yang.gen.v1.mapping.database.rev141209.AddMappingInput;
-import org.opendaylight.yang.gen.v1.mapping.database.rev141209.MappingDatabaseService;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.AddMappingInput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.AddMappingOutput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.GetMappingInput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.GetMappingOutput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.MappingDatabaseService;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.RemoveMappingInput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.UpdateMappingInput;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv6Address;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.PortNumber;
@@ -369,13 +374,31 @@ public class LispMappingService implements CommandProvider, IFlowMapping, Bindin
     }
 
     @Override
-    public Future<RpcResult<Void>> addMapping(AddMappingInput input) {
+    public Future<RpcResult<AddMappingOutput>> addMapping(AddMappingInput input) {
         LOG.info("addMapping RPC called");
         if (input instanceof EidToLocatorRecord) {
             LOG.info("addMapping(EidToLocatorRecord) received");
         }
         LOG.info("Request received to add the following mapping: " + input.toString());
 
+        return null;
+    }
+
+    @Override
+    public Future<RpcResult<GetMappingOutput>> getMapping(GetMappingInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Future<RpcResult<Void>> removeMapping(RemoveMappingInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Future<RpcResult<Void>> updateMapping(UpdateMappingInput input) {
+        // TODO Auto-generated method stub
         return null;
     }
 

@@ -11,13 +11,51 @@ module mapping-database {
     description
         "An MD-SAL based implementation of a LISP Map-Server database";
 
-    revision "2014-12-09" {
+    revision "2015-03-14" {
         description "Initial revision.";
+    }
+
+    typedef mapping-ref {
+        type instance-identifier;
     }
 
     rpc add-mapping {
         input {
             uses lfm:EidToLocatorRecord;
+        }
+        output {
+            leaf map-ref {
+                type mapping-ref;
+            }
+        }
+    }
+
+    rpc get-mapping {
+        input {
+            uses lfm:LispAddress;
+        }
+        output {
+            leaf map-ref {
+                type mapping-ref;
+            }
+            uses lfm:EidToLocatorRecord;
+        }
+    }
+
+    rpc update-mapping {
+        input {
+            leaf map-ref {
+                type mapping-ref;
+            }
+            uses lfm:EidToLocatorRecord;
+        }
+    }
+
+    rpc remove-mapping {
+        input {
+            leaf map-ref {
+                type mapping-ref;
+            }
         }
     }
 }

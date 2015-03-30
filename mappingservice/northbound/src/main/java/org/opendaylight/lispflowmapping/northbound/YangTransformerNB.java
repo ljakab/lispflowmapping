@@ -28,24 +28,22 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafsourcedestaddr
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcaftrafficengineeringaddress.Hops;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcaftrafficengineeringaddress.HopsBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.LispAddressContainer;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.LispAddressContainerBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.Address;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.AS;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ASBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.DistinguishedName;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.DistinguishedNameBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Ipv4;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Ipv4Builder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Ipv6;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Ipv6Builder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.LcafApplicationDataBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.LcafListBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.LcafSegmentBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.LcafSourceDestBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.LcafTrafficEngineeringBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Mac;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.MacBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.NoBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.as.AS;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.as.ASBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.distinguishedname.DistinguishedName;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.distinguishedname.DistinguishedNameBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv4.Ipv4Address;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv4.Ipv4AddressBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv6.Ipv6Address;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv6.Ipv6AddressBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcafapplicationdata.LcafApplicationDataAddrBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcaflist.LcafListAddrBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcafsegment.LcafSegmentAddrBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddrBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcaftrafficengineering.LcafTrafficEngineeringAddrBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.mac.MacAddress;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.mac.MacAddressBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.no.NoAddressBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.PrimitiveAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.locatorrecords.LocatorRecord;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.locatorrecords.LocatorRecordBuilder;
@@ -55,6 +53,8 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequest.ItrRloc
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequest.SourceEidBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequestnotification.MapRequestBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.reencaphop.HopBuilder;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.PortNumber;
+import org.opendaylight.lispflowmapping.implementation.util.LispAFIConvertor;
 import org.opendaylight.lispflowmapping.type.AddressFamilyNumberEnum;
 import org.opendaylight.lispflowmapping.type.LispCanonicalAddressFormatEnum;
 import org.opendaylight.lispflowmapping.type.lisp.EidRecord;
@@ -73,37 +73,25 @@ import org.opendaylight.lispflowmapping.type.lisp.address.LispSegmentLCAFAddress
 import org.opendaylight.lispflowmapping.type.lisp.address.LispSourceDestLCAFAddress;
 import org.opendaylight.lispflowmapping.type.lisp.address.LispTrafficEngineeringLCAFAddress;
 import org.opendaylight.lispflowmapping.type.lisp.address.ReencapHop;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv6Address;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.PortNumber;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev100924.MacAddress;
 
 public class YangTransformerNB {
 
-    public static LispAddressContainer toContainer(LispAFIAddress address) {
-        if (address instanceof Address) {
-            return new LispAddressContainerBuilder().setAddress((Address) address).build();
-        } else {
-            return null;
-        }
-    }
-
     public static LispAFIAddress toAFI(LispAddressContainer container) {
-        return (LispAFIAddress) container.getAddress();
+        return LispAFIConvertor.toAFI(container);
     }
 
     public static PrimitiveAddress toPrimitive(LispAFIAddress address) {
-        if (address instanceof Ipv4) {
+        if (address instanceof Ipv4Address) {
             return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4Builder()
-                    .setIpv4Address(((Ipv4) address).getIpv4Address()).setAfi(address.getAfi()).build();
+                    .setIpv4Address(((Ipv4Address) address).getIpv4Address()).setAfi(address.getAfi()).build();
         }
-        if (address instanceof Ipv6) {
+        if (address instanceof Ipv6Address) {
             return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv6Builder()
-                    .setIpv6Address(((Ipv6) address).getIpv6Address()).setAfi(address.getAfi()).build();
+                    .setIpv6Address(((Ipv6Address) address).getIpv6Address()).setAfi(address.getAfi()).build();
         }
-        if (address instanceof Mac) {
+        if (address instanceof MacAddress) {
             return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.MacBuilder()
-                    .setAfi(address.getAfi()).setMacAddress(((Mac) address).getMacAddress()).build();
+                    .setAfi(address.getAfi()).setMacAddress(((MacAddress) address).getMacAddress()).build();
         }
         if (address instanceof DistinguishedName) {
             return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.DistinguishedNameBuilder()
@@ -119,35 +107,35 @@ public class YangTransformerNB {
     public static LispAFIAddress toAFIfromPrimitive(PrimitiveAddress primitive) {
 
         if (primitive instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4) {
-            return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Ipv4Builder()
+            return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv4.Ipv4AddressBuilder()
                     .setAfi(((LispAFIAddress) primitive).getAfi())
                     .setIpv4Address(
                             ((org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4) primitive)
                                     .getIpv4Address()).build();
         }
         if (primitive instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv6) {
-            return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Ipv6Builder()
+            return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv6.Ipv6AddressBuilder()
                     .setAfi(((LispAFIAddress) primitive).getAfi())
                     .setIpv6Address(
                             ((org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv6) primitive)
                                     .getIpv6Address()).build();
         }
         if (primitive instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Mac) {
-            return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.MacBuilder()
+            return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.mac.MacAddressBuilder()
                     .setAfi(((LispAFIAddress) primitive).getAfi())
                     .setMacAddress(
                             ((org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Mac) primitive)
                                     .getMacAddress()).build();
         }
         if (primitive instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.DistinguishedName) {
-            return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.DistinguishedNameBuilder()
+            return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.distinguishedname.DistinguishedNameBuilder()
                     .setAfi(((LispAFIAddress) primitive).getAfi())
                     .setDistinguishedName(
                             ((org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.DistinguishedName) primitive)
                                     .getDistinguishedName()).build();
         }
         if (primitive instanceof org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.AS) {
-            return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ASBuilder()
+            return new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.as.ASBuilder()
                     .setAfi(((LispAFIAddress) primitive).getAfi())
                     .setAS(((org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.AS) primitive).getAS())
                     .build();
@@ -168,11 +156,13 @@ public class YangTransformerNB {
 
         case IP:
             LispIpv4Address lispIpv4Address = (LispIpv4Address) lispAddress;
-            Ipv4Address ipv4Address = new Ipv4Address(lispIpv4Address.getAddress().getHostAddress());
-            lispAFIAddress = new Ipv4Builder().setIpv4Address(ipv4Address).setAfi(ianaCode).build();
+            org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address ipv4Address =
+                    new org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address(
+                            lispIpv4Address.getAddress().getHostAddress());
+            lispAFIAddress = new Ipv4AddressBuilder().setIpv4Address(ipv4Address).setAfi(ianaCode).build();
             break;
         case NO_ADDRESS:
-            lispAFIAddress = new NoBuilder().setAfi(ianaCode).build();
+            lispAFIAddress = new NoAddressBuilder().setAfi(ianaCode).build();
         case AS:
             LispASAddress lispASAddress = (LispASAddress) lispAddress;
             lispAFIAddress = new ASBuilder().setAS(lispASAddress.getAS()).setAfi(ianaCode).build();
@@ -183,8 +173,10 @@ public class YangTransformerNB {
             break;
         case IP6:
             LispIpv6Address lispIpv6Address = (LispIpv6Address) lispAddress;
-            Ipv6Address ipv6Address = new Ipv6Address(lispIpv6Address.getAddress().getHostAddress());
-            lispAFIAddress = new Ipv6Builder().setIpv6Address(ipv6Address).setAfi(ianaCode).build();
+            org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv6Address ipv6Address =
+                    new org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv6Address(
+                            lispIpv6Address.getAddress().getHostAddress());
+            lispAFIAddress = new Ipv6AddressBuilder().setIpv6Address(ipv6Address).setAfi(ianaCode).build();
             break;
 
         case MAC:
@@ -223,7 +215,7 @@ public class YangTransformerNB {
             throw new IllegalArgumentException("AFI " + lispAddress.getAfi() + " not supported by this transformer");
         }
 
-        return toContainer(lispAFIAddress);
+        return LispAFIConvertor.toContainer(lispAFIAddress);
 
     }
 
@@ -236,7 +228,8 @@ public class YangTransformerNB {
             sb.append(String.format("%02x", b));
         }
 
-        return new MacBuilder().setAfi(lispMacAddress.getAfi().getIanaCode()).setMacAddress(new MacAddress(sb.toString())).build();
+        return new MacAddressBuilder().setAfi(lispMacAddress.getAfi().getIanaCode()).setMacAddress(
+                new org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev100924.MacAddress(sb.toString())).build();
     }
 
     public static LispAFIAddress transformLispApplicationDataLCAFAddress(LispLCAFAddress lispLcafAddress) {
@@ -244,7 +237,7 @@ public class YangTransformerNB {
         org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafapplicationdataaddress.Address address;
         address = new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafapplicationdataaddress.AddressBuilder().setPrimitiveAddress(
                 toPrimitive(toAFI(transformLispAddress(lispApplicationDataLCAFAddress.getAddress())))).build();
-        return new LcafApplicationDataBuilder().setAfi(lispLcafAddress.getAfi().getIanaCode())
+        return new LcafApplicationDataAddrBuilder().setAfi(lispLcafAddress.getAfi().getIanaCode())
                 .setLcafType((short) lispLcafAddress.getType().getLispCode()).setIpTos(lispApplicationDataLCAFAddress.getIPTos())
                 .setLocalPort(new PortNumber((int) lispApplicationDataLCAFAddress.getLocalPort()))
                 .setRemotePort(new PortNumber((int) lispApplicationDataLCAFAddress.getRemotePort())).setAddress(address).build();
@@ -263,7 +256,7 @@ public class YangTransformerNB {
             listAddresses.add(addresses);
         }
 
-        return new LcafListBuilder().setAfi(lispLcafAddress.getAfi().getIanaCode()).setLcafType((short) lispLcafAddress.getType().getLispCode())
+        return new LcafListAddrBuilder().setAfi(lispLcafAddress.getAfi().getIanaCode()).setLcafType((short) lispLcafAddress.getType().getLispCode())
                 .setAddresses(listAddresses).build();
     }
 
@@ -273,7 +266,7 @@ public class YangTransformerNB {
         address = new org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafsegmentaddress.AddressBuilder().setPrimitiveAddress(
                 toPrimitive(toAFI(transformLispAddress(lispSegmentLCAFAddress.getAddress())))).build();
 
-        return new LcafSegmentBuilder().setAfi(lispLcafAddress.getAfi().getIanaCode()).setLcafType((short) lispLcafAddress.getType().getLispCode())
+        return new LcafSegmentAddrBuilder().setAfi(lispLcafAddress.getAfi().getIanaCode()).setLcafType((short) lispLcafAddress.getType().getLispCode())
                 .setInstanceId((long) lispSegmentLCAFAddress.getInstanceId()).setAddress(address).build();
 
     }
@@ -287,7 +280,7 @@ public class YangTransformerNB {
         DstAddress dstAddress = new DstAddressBuilder().setPrimitiveAddress(
                 toPrimitive(toAFI(transformLispAddress(lispSourceDestLCAFAddress.getDstAddress())))).build();
 
-        return new LcafSourceDestBuilder().setAfi(lispLcafAddress.getAfi().getIanaCode())
+        return new LcafSourceDestAddrBuilder().setAfi(lispLcafAddress.getAfi().getIanaCode())
                 .setLcafType((short) lispLcafAddress.getType().getLispCode()).setSrcMaskLength((short) lispSourceDestLCAFAddress.getSrcMaskLength())
                 .setDstMaskLength((short) lispSourceDestLCAFAddress.getDstMaskLength()).setSrcAddress(srcAddress).setDstAddress(dstAddress).build();
     }
@@ -310,14 +303,14 @@ public class YangTransformerNB {
 
         }
 
-        return new LcafTrafficEngineeringBuilder().setAfi(lispLcafAddress.getAfi().getIanaCode())
+        return new LcafTrafficEngineeringAddrBuilder().setAfi(lispLcafAddress.getAfi().getIanaCode())
                 .setLcafType((short) lispLcafAddress.getType().getLispCode()).setHops(listHops).build();
     }
 
     public static LispAddress transformToLispAddress(LispAddressContainer lispAddress) {
 
         LispAddress legacyAddress = null;
-        LispAFIAddress address = (LispAFIAddress) lispAddress.getAddress();
+        LispAFIAddress address = LispAFIConvertor.toAFI(lispAddress);
         AddressFamilyNumberEnum afi = AddressFamilyNumberEnum.valueOf(address.getAfi());
 
         switch (afi) {
@@ -394,7 +387,7 @@ public class YangTransformerNB {
 
         return new LispApplicationDataLCAFAddress((byte) 0, lcafApplicationDataAddress.getProtocol().byteValue(), lcafApplicationDataAddress
                 .getIpTos().intValue(), lcafApplicationDataAddress.getLocalPort().getValue().shortValue(), lcafApplicationDataAddress.getRemotePort()
-                .getValue().shortValue(), transformToLispAddress(toContainer(toAFIfromPrimitive(lcafApplicationDataAddress.getAddress()
+                .getValue().shortValue(), transformToLispAddress(LispAFIConvertor.toContainer(toAFIfromPrimitive(lcafApplicationDataAddress.getAddress()
                 .getPrimitiveAddress()))));
     }
 
@@ -406,7 +399,7 @@ public class YangTransformerNB {
 
         for (int i = 0; i < lcafListAddress.getAddresses().size(); i++) {
             listLegacyAddress
-                    .add(transformToLispAddress(toContainer(toAFIfromPrimitive(lcafListAddress.getAddresses().get(i).getPrimitiveAddress()))));
+                    .add(transformToLispAddress(LispAFIConvertor.toContainer(toAFIfromPrimitive(lcafListAddress.getAddresses().get(i).getPrimitiveAddress()))));
         }
         return new LispListLCAFAddress((byte) 0, listLegacyAddress);
     }
@@ -418,7 +411,7 @@ public class YangTransformerNB {
         byte iidMaskLen = 0;
 
         return new LispSegmentLCAFAddress(iidMaskLen, lcafSegmentAddress.getInstanceId().intValue(),
-                transformToLispAddress(toContainer(toAFIfromPrimitive(lcafSegmentAddress.getAddress().getPrimitiveAddress()))));
+                transformToLispAddress(LispAFIConvertor.toContainer(toAFIfromPrimitive(lcafSegmentAddress.getAddress().getPrimitiveAddress()))));
 
     }
 
@@ -428,8 +421,8 @@ public class YangTransformerNB {
         lcafSourceDestAddress = (org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LcafSourceDestAddress) lispLcafAddress;
 
         return new LispSourceDestLCAFAddress((byte) 0, (short) 0, lcafSourceDestAddress.getSrcMaskLength().byteValue(), lcafSourceDestAddress
-                .getDstMaskLength().byteValue(), transformToLispAddress(toContainer(toAFIfromPrimitive(lcafSourceDestAddress.getSrcAddress()
-                .getPrimitiveAddress()))), transformToLispAddress(toContainer(toAFIfromPrimitive(lcafSourceDestAddress.getDstAddress()
+                .getDstMaskLength().byteValue(), transformToLispAddress(LispAFIConvertor.toContainer(toAFIfromPrimitive(lcafSourceDestAddress.getSrcAddress()
+                .getPrimitiveAddress()))), transformToLispAddress(LispAFIConvertor.toContainer(toAFIfromPrimitive(lcafSourceDestAddress.getDstAddress()
                 .getPrimitiveAddress()))));
 
     }
@@ -448,7 +441,7 @@ public class YangTransformerNB {
         for (int i = 0; i < lcafTrafficEngineeringAddress.getHops().size(); i++) {
             hop = (org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.ReencapHop) lcafTrafficEngineeringAddress.getHops().get(i);
 
-            legacyHop = new ReencapHop(transformToLispAddress(toContainer(toAFIfromPrimitive(hop.getHop().getPrimitiveAddress()))), (short) 0,
+            legacyHop = new ReencapHop(transformToLispAddress(LispAFIConvertor.toContainer(toAFIfromPrimitive(hop.getHop().getPrimitiveAddress()))), (short) 0,
                     hop.isLookup(), hop.isRLOCProbe(), hop.isStrict());
 
             listLegacyHops.add(legacyHop);

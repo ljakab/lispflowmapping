@@ -17,7 +17,7 @@
     <module>clusterdao</module>
     <module>implementation</module>
     <module>southbound</module>
-    <!-- <module>northbound</module> -->
+    <module>northbound</module>
     <module>neutron</module>
     <module>netconf</module>
     <module>integrationtest</module>

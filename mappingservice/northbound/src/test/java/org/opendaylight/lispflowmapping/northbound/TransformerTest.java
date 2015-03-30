@@ -12,6 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.opendaylight.lispflowmapping.implementation.util.LispAFIConvertor;
 import org.opendaylight.lispflowmapping.tools.junit.BaseTestCase;
 import org.opendaylight.lispflowmapping.type.AddressFamilyNumberEnum;
 import org.opendaylight.lispflowmapping.type.LispCanonicalAddressFormatEnum;
@@ -24,8 +25,8 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafsourcedestaddr
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafsourcedestaddress.SrcAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcafsourcedestaddress.SrcAddressBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.LispAddressContainer;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Ipv4Builder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.LcafSourceDestBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv4.Ipv4AddressBuilder;
+import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddrBuilder;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address;
 
 
@@ -112,12 +113,12 @@ public class TransformerTest extends BaseTestCase{
     public void transformLispAddressContainer__ipv4() throws Exception {
 
     	Ipv4Address ipv4AddressIn = new Ipv4Address("10.0.0.1");
-    	LispAFIAddress lispAFIAddressIn = new Ipv4Builder()
+        LispAFIAddress lispAFIAddressIn = new Ipv4AddressBuilder()
     		.setIpv4Address(ipv4AddressIn)
     		.setAfi(AddressFamilyNumberEnum.IP.getIanaCode())
     		.build();
 
-    	LispAddressContainer lispAddressContainerIn = YangTransformerNB.toContainer(lispAFIAddressIn);
+        LispAddressContainer lispAddressContainerIn = LispAFIConvertor.toContainer(lispAFIAddressIn);
 
     	LispAddressGeneric lispAddressGeneric
     		= new LispAddressGeneric(YangTransformerNB.transformToLispAddress(lispAddressContainerIn));
@@ -125,7 +126,7 @@ public class TransformerTest extends BaseTestCase{
     	LispAddressContainer lispAddressContainerOut
     		= YangTransformerNB.transformLispAddress(LispAddressConvertorNB.convertToLispAddress(lispAddressGeneric));
 
-    	LispAFIAddress lispAFIAddressOut = (LispAFIAddress) lispAddressContainerOut.getAddress();
+        LispAFIAddress lispAFIAddressOut = LispAFIConvertor.toAFI(lispAddressContainerOut);
 
         org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispIpv4Address lispIpv4AddressOut;
         lispIpv4AddressOut = (org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispIpv4Address) lispAFIAddressOut;
@@ -141,13 +142,13 @@ public class TransformerTest extends BaseTestCase{
     public void transformLispAddressContainer__srcdst() throws Exception {
 
     	Ipv4Address ipv4AddressSrcIn = new Ipv4Address("10.0.0.1");
-    	LispAFIAddress lispAFIAddressSrc = new Ipv4Builder()
+        LispAFIAddress lispAFIAddressSrc = new Ipv4AddressBuilder()
     		.setIpv4Address(ipv4AddressSrcIn)
     		.setAfi(AddressFamilyNumberEnum.IP.getIanaCode())
     		.build();
 
     	Ipv4Address ipv4AddressDstIn = new Ipv4Address("20.0.0.2");
-    	LispAFIAddress lispAFIAddressDst = new Ipv4Builder()
+        LispAFIAddress lispAFIAddressDst = new Ipv4AddressBuilder()
     		.setIpv4Address(ipv4AddressDstIn)
     		.setAfi(AddressFamilyNumberEnum.IP.getIanaCode())
     		.build();
@@ -160,7 +161,7 @@ public class TransformerTest extends BaseTestCase{
 			.setPrimitiveAddress(YangTransformerNB.toPrimitive(lispAFIAddressDst))
 			.build();
 
-    	LispAFIAddress lispAFIAddressIn = new LcafSourceDestBuilder()
+        LispAFIAddress lispAFIAddressIn = new LcafSourceDestAddrBuilder()
 			.setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode())
 			.setLcafType((short) LispCanonicalAddressFormatEnum.SOURCE_DEST.getLispCode())
 			.setSrcMaskLength((short) 32)
@@ -169,7 +170,7 @@ public class TransformerTest extends BaseTestCase{
 			.setDstAddress(dstAddress)
 			.build();
 
-    	LispAddressContainer lispAddressContainerIn = YangTransformerNB.toContainer(lispAFIAddressIn);
+        LispAddressContainer lispAddressContainerIn = LispAFIConvertor.toContainer(lispAFIAddressIn);
 
     	LispAddressGeneric lispAddressGeneric
     		= new LispAddressGeneric(YangTransformerNB.transformToLispAddress(lispAddressContainerIn));
@@ -177,7 +178,7 @@ public class TransformerTest extends BaseTestCase{
     	LispAddressContainer lispAddressContainerOut
     		= YangTransformerNB.transformLispAddress(LispAddressConvertorNB.convertToLispAddress(lispAddressGeneric));
 
-    	LispAFIAddress lispAFIAddressOut = (LispAFIAddress) lispAddressContainerOut.getAddress();
+        LispAFIAddress lispAFIAddressOut = LispAFIConvertor.toAFI(lispAddressContainerOut);
 
 
     	org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LcafSourceDestAddress lcafSourceDestAddressOut;

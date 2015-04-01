@@ -56,13 +56,23 @@ import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.mapreplymessage.Ma
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequestmessage.MapRequestBuilder;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.transportaddress.TransportAddress;
 import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.transportaddress.TransportAddressBuilder;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.AddKeyInput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.AddKeyOutput;
 import org.opendaylight.yang.gen.v1.mapping.database.rev150314.AddMappingInput;
 import org.opendaylight.yang.gen.v1.mapping.database.rev150314.AddMappingOutput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.GetKeyInput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.GetKeyOutput;
 import org.opendaylight.yang.gen.v1.mapping.database.rev150314.GetMappingInput;
 import org.opendaylight.yang.gen.v1.mapping.database.rev150314.GetMappingOutput;
 import org.opendaylight.yang.gen.v1.mapping.database.rev150314.MappingDatabaseService;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.RemoveKeyInput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.RemoveKeyWithRefInput;
 import org.opendaylight.yang.gen.v1.mapping.database.rev150314.RemoveMappingInput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.RemoveMappingWithRefInput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.UpdateKeyInput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.UpdateKeyWithRefInput;
 import org.opendaylight.yang.gen.v1.mapping.database.rev150314.UpdateMappingInput;
+import org.opendaylight.yang.gen.v1.mapping.database.rev150314.UpdateMappingWithRefInput;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv6Address;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.PortNumber;
@@ -389,7 +399,31 @@ public class LispMappingService implements CommandProvider, IFlowMapping, Bindin
     }
 
     @Override
+    public Future<RpcResult<AddKeyOutput>> addKey(AddKeyInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Future<RpcResult<GetKeyOutput>> getKey(GetKeyInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public Future<RpcResult<GetMappingOutput>> getMapping(GetMappingInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Future<RpcResult<Void>> removeKey(RemoveKeyInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Future<RpcResult<Void>> removeKeyWithRef(RemoveKeyWithRefInput input) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -401,7 +435,33 @@ public class LispMappingService implements CommandProvider, IFlowMapping, Bindin
     }
 
     @Override
+    public Future<RpcResult<Void>> removeMappingWithRef(
+            RemoveMappingWithRefInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Future<RpcResult<Void>> updateKey(UpdateKeyInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Future<RpcResult<Void>> updateKeyWithRef(UpdateKeyWithRefInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public Future<RpcResult<Void>> updateMapping(UpdateMappingInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Future<RpcResult<Void>> updateMappingWithRef(
+            UpdateMappingWithRefInput input) {
         // TODO Auto-generated method stub
         return null;
     }

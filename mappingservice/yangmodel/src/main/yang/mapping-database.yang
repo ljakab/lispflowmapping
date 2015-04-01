@@ -15,8 +15,79 @@ module mapping-database {
         description "Initial revision.";
     }
 
+    typedef key-ref {
+        type instance-identifier;
+    }
+
     typedef mapping-ref {
         type instance-identifier;
+    }
+
+    grouping mapping-key {
+        uses lfm:LispAddress;
+        leaf key-type {
+            type uint16;
+        }
+        leaf key {
+            type string;
+        }
+    }
+
+    rpc add-key {
+        input {
+            uses mapping-key;
+        }
+        output {
+            leaf key-ref {
+                type key-ref;
+            }
+        }
+    }
+
+    rpc get-key {
+        input {
+            uses lfm:LispAddress;
+        }
+        output {
+            leaf key-ref {
+                type key-ref;
+            }
+            uses mapping-key;
+        }
+    }
+
+    rpc update-key {
+        input {
+            container eid {
+                uses lfm:LispAddress;
+            }
+            container key {
+                uses mapping-key;
+            }
+        }
+    }
+
+    rpc remove-key {
+        input {
+            uses lfm:LispAddress;
+        }
+    }
+
+    rpc update-key-with-ref {
+        input {
+            leaf key-ref {
+                type key-ref;
+            }
+            uses mapping-key;
+        }
+    }
+
+    rpc remove-key-with-ref {
+        input {
+            leaf key-ref {
+                type key-ref;
+            }
+        }
     }
 
     rpc add-mapping {
@@ -44,6 +115,23 @@ module mapping-database {
 
     rpc update-mapping {
         input {
+            container eid {
+                uses lfm:LispAddress;
+            }
+            container mapping {
+                uses lfm:EidToLocatorRecord;
+            }
+        }
+    }
+
+    rpc remove-mapping {
+        input {
+            uses lfm:LispAddress;
+        }
+    }
+
+    rpc update-mapping-with-ref {
+        input {
             leaf map-ref {
                 type mapping-ref;
             }
@@ -51,7 +139,7 @@ module mapping-database {
         }
     }
 
-    rpc remove-mapping {
+    rpc remove-mapping-with-ref {
         input {
             leaf map-ref {
                 type mapping-ref;

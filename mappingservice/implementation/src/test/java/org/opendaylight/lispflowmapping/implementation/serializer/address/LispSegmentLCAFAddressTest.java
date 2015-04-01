@@ -81,6 +81,7 @@ public class LispSegmentLCAFAddressTest extends BaseTestCase {
     public void serialize__Simple() throws Exception {
         LcafSegmentAddrBuilder addressBuilder = new LcafSegmentAddrBuilder();
         addressBuilder.setInstanceId((long) 0x00020304);
+        addressBuilder.setIidMaskLength((short) 0);
         addressBuilder.setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode()).setLcafType((short) LispCanonicalAddressFormatEnum.SEGMENT.getLispCode());
         addressBuilder.setAddress(new AddressBuilder().setPrimitiveAddress(LispAFIConvertor.asPrimitiveIPAfiAddress("17.34.51.68")).build());
         ByteBuffer buf = ByteBuffer.allocate(LispAddressSerializer.getInstance().getAddressSize(addressBuilder.build()));

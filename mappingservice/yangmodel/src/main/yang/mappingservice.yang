@@ -410,14 +410,6 @@
     }
 
     grouping EidToLocatorRecord {
-        leaf eid {
-            type eid-uri;
-        }
-
-        leaf origin {
-            type mapping-origin;
-        }
-
     	leaf recordTtl {
     		type int32;
     	}
@@ -639,7 +631,7 @@
     	uses MapReplyNotification;
     }
 
-    grouping db-instance-id {
+    grouping db-instance {
         description "Describes the mappings belonging to the same Instance ID";
         leaf iid {
             description "The 24-bit Instance ID";
@@ -647,8 +639,14 @@
         }
         list eid {
             description "A list of EID-to-RLOC mappings within the same Instance ID";
-            key "eid";
+            key "eid origin";
             ext:context-instance "eid-context";
+            leaf eid {
+                type eid-uri;
+            }
+            leaf origin {
+                type mapping-origin;
+            }
             uses EidToLocatorRecord;
         }
     }
@@ -659,7 +657,7 @@
             description "A list of LISP Instance IDs";
             key "iid";
             ext:context-instance instance-id-context";
-            uses db-instance-id;
+            uses db-instance;
         }
     }
 }

@@ -7,8 +7,8 @@
  */
 package org.opendaylight.lispflowmapping.implementation.authentication;
 
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapNotify;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapRegister;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.MapNotify;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.MapRegister;
 
 public interface ILispAuthentication {
     public boolean validate(MapRegister mapRegister, String key);

@@ -16,13 +16,13 @@ import org.opendaylight.lispflowmapping.implementation.serializer.address.LispAd
 import org.opendaylight.lispflowmapping.implementation.util.ByteUtil;
 import org.opendaylight.lispflowmapping.implementation.util.LispAFIConvertor;
 import org.opendaylight.lispflowmapping.implementation.util.NumberUtil;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapRequest;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidrecords.EidRecord;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecordBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequest.ItrRloc;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequest.ItrRlocBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequest.SourceEidBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequestnotification.MapRequestBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.MapRequest;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.eidrecords.EidRecord;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.eidtolocatorrecords.EidToLocatorRecordBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.maprequest.ItrRloc;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.maprequest.ItrRlocBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.maprequest.SourceEidBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.maprequestnotification.MapRequestBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -153,7 +153,7 @@ public class MapRequestSerializer {
             }
             if (builder.isMapDataPresent() && requestBuffer.hasRemaining()) {
                 try {
-                    builder.setMapReply(new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequest.MapReplyBuilder(
+                    builder.setMapReply(new org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.maprequest.MapReplyBuilder(
                             new EidToLocatorRecordBuilder(EidToLocatorRecordSerializer.getInstance().deserialize(requestBuffer)).build()).build());
                 } catch (RuntimeException re) {
                     LOG.warn("couldn't deserialize map reply encapsulated in map request. {}", re.getMessage());

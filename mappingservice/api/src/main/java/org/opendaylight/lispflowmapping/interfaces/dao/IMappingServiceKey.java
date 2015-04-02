@@ -8,7 +8,7 @@
 
 package org.opendaylight.lispflowmapping.interfaces.dao;
 
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.LispAddressContainer;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.lispaddress.LispAddressContainer;
 
 /**
  * The mapping service key in the DAO.

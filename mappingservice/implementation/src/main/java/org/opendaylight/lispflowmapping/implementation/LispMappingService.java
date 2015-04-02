@@ -37,43 +37,43 @@ import org.opendaylight.lispflowmapping.interfaces.lisp.IMapNotifyHandler;
 import org.opendaylight.lispflowmapping.interfaces.lisp.IMapRequestResultHandler;
 import org.opendaylight.lispflowmapping.interfaces.lisp.IMapResolverAsync;
 import org.opendaylight.lispflowmapping.interfaces.lisp.IMapServerAsync;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.AddMapping;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.EidToLocatorRecord;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.LispflowmappingService;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapNotify;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapRegister;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapReply;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapRequest;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.RequestMapping;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.SendMapNotifyInputBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.SendMapReplyInputBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.SendMapRequestInputBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.LispAddressContainer;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.LispAddressContainerBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.Address;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv4.Ipv4AddressBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.mapnotifymessage.MapNotifyBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.mapreplymessage.MapReplyBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequestmessage.MapRequestBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.transportaddress.TransportAddress;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.transportaddress.TransportAddressBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.AddKeyInput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.AddKeyOutput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.AddMappingInput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.AddMappingOutput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.GetKeyInput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.GetKeyOutput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.GetMappingInput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.GetMappingOutput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.LispMappingDatabaseService;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.RemoveKeyInput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.RemoveKeyWithRefInput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.RemoveMappingInput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.RemoveMappingWithRefInput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.UpdateKeyInput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.UpdateKeyWithRefInput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.UpdateMappingInput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lisp.mapping.database.rev150314.UpdateMappingWithRefInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.AddMapping;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.EidToLocatorRecord;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.LfmControlPlaneService;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.MapNotify;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.MapRegister;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.MapReply;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.MapRequest;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.RequestMapping;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.SendMapNotifyInputBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.SendMapReplyInputBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.SendMapRequestInputBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.lispaddress.LispAddressContainer;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.lispaddress.LispAddressContainerBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.lispaddress.lispaddresscontainer.Address;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.lispaddress.lispaddresscontainer.address.ipv4.Ipv4AddressBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.mapnotifymessage.MapNotifyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.mapreplymessage.MapReplyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.maprequestmessage.MapRequestBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.transportaddress.TransportAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.transportaddress.TransportAddressBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.AddKeyInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.AddKeyOutput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.AddMappingInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.AddMappingOutput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.GetKeyInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.GetKeyOutput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.GetMappingInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.GetMappingOutput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.LfmMappingDatabaseService;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.RemoveKeyInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.RemoveKeyWithRefInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.RemoveMappingInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.RemoveMappingWithRefInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.UpdateKeyInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.UpdateKeyWithRefInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.UpdateMappingInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.UpdateMappingWithRefInput;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv6Address;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.PortNumber;
@@ -85,7 +85,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LispMappingService implements CommandProvider, IFlowMapping, IFlowMappingShell, BindingAwareProvider,
-        IMapRequestResultHandler, IMapNotifyHandler, LispMappingDatabaseService {
+        IMapRequestResultHandler, IMapNotifyHandler, LfmMappingDatabaseService {
     protected static final Logger LOG = LoggerFactory.getLogger(LispMappingService.class);
 
     private static final ConfigIni configIni = new ConfigIni();
@@ -99,7 +99,7 @@ public class LispMappingService implements CommandProvider, IFlowMapping, IFlowM
     private ThreadLocal<MapNotify> tlsMapNotify = new ThreadLocal<MapNotify>();
     private ThreadLocal<Pair<MapRequest, TransportAddress>> tlsMapRequest = new ThreadLocal<Pair<MapRequest, TransportAddress>>();
 
-    private LispflowmappingService lispSB = null;
+    private LfmControlPlaneService lispSB = null;
 
     private ProviderContext session;
 
@@ -304,7 +304,7 @@ public class LispMappingService implements CommandProvider, IFlowMapping, IFlowM
         notificationService = session.getSALService(NotificationService.class);
         registerNotificationListener(AddMapping.class, new MapRegisterNotificationHandler());
         registerNotificationListener(RequestMapping.class, new MapRequestNotificationHandler());
-        session.addRpcImplementation(LispMappingDatabaseService.class, this);
+        session.addRpcImplementation(LfmMappingDatabaseService.class, this);
         this.session = session;
     }
 
@@ -349,9 +349,9 @@ public class LispMappingService implements CommandProvider, IFlowMapping, IFlowM
         }
     }
 
-    private LispflowmappingService getLispSB() {
+    private LfmControlPlaneService getLispSB() {
         if (lispSB == null) {
-            lispSB = session.getRpcService(LispflowmappingService.class);
+            lispSB = session.getRpcService(LfmControlPlaneService.class);
         }
         return lispSB;
     }

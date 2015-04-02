@@ -1,11 +1,11 @@
-  module lispflowmapping {
+  module lfm-control-plane {
 
 
 
     namespace
-      "urn:opendaylight:lispflowmapping";
+      "urn:opendaylight:lfm-control-plane";
 
-    prefix lispflowmapping;
+    prefix lfm-control-plane;
 
     import ietf-inet-types {
                prefix inet;

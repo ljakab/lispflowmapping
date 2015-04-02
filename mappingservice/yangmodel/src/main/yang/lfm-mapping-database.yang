@@ -1,10 +1,10 @@
-module lisp-mapping-database {
+module lfm-mapping-database {
 
     yang-version 1;
-    namespace "urn:opendaylight:lisp-mapping-database";
-    prefix "lisp-mapping-database";
+    namespace "urn:opendaylight:lfm-mapping-database";
+    prefix "lfm-mapping-database";
 
-    import lispflowmapping { prefix lfm; revision-date 2015-03-14; }
+    import lfm-control-plane { prefix lfm-cp; revision-date 2015-03-14; }
 
     contact "Lorand Jakab <lojakab@cisco.com";
 
@@ -24,7 +24,7 @@ module lisp-mapping-database {
     }
 
     grouping mapping-key {
-        uses lfm:LispAddress;
+        uses lfm-cp:LispAddress;
         leaf key-type {
             type uint16;
         }
@@ -46,7 +46,7 @@ module lisp-mapping-database {
 
     rpc get-key {
         input {
-            uses lfm:LispAddress;
+            uses lfm-cp:LispAddress;
         }
         output {
             leaf key-ref {
@@ -59,7 +59,7 @@ module lisp-mapping-database {
     rpc update-key {
         input {
             container eid {
-                uses lfm:LispAddress;
+                uses lfm-cp:LispAddress;
             }
             container key {
                 uses mapping-key;
@@ -69,7 +69,7 @@ module lisp-mapping-database {
 
     rpc remove-key {
         input {
-            uses lfm:LispAddress;
+            uses lfm-cp:LispAddress;
         }
     }
 
@@ -92,7 +92,7 @@ module lisp-mapping-database {
 
     rpc add-mapping {
         input {
-            uses lfm:EidToLocatorRecord;
+            uses lfm-cp:EidToLocatorRecord;
         }
         output {
             leaf map-ref {
@@ -103,30 +103,30 @@ module lisp-mapping-database {
 
     rpc get-mapping {
         input {
-            uses lfm:LispAddress;
+            uses lfm-cp:LispAddress;
         }
         output {
             leaf map-ref {
                 type mapping-ref;
             }
-            uses lfm:EidToLocatorRecord;
+            uses lfm-cp:EidToLocatorRecord;
         }
     }
 
     rpc update-mapping {
         input {
             container eid {
-                uses lfm:LispAddress;
+                uses lfm-cp:LispAddress;
             }
             container mapping {
-                uses lfm:EidToLocatorRecord;
+                uses lfm-cp:EidToLocatorRecord;
             }
         }
     }
 
     rpc remove-mapping {
         input {
-            uses lfm:LispAddress;
+            uses lfm-cp:LispAddress;
         }
     }
 
@@ -135,7 +135,7 @@ module lisp-mapping-database {
             leaf map-ref {
                 type mapping-ref;
             }
-            uses lfm:EidToLocatorRecord;
+            uses lfm-cp:EidToLocatorRecord;
         }
     }
 

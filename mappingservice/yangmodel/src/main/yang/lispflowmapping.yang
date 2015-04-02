@@ -234,9 +234,13 @@
     			default 10;
     	}
     }
-       list Hops {
-               uses ReencapHop;
-       }
+        list Hops {
+            key "name";
+            leaf name {
+                type string;
+            }
+            uses ReencapHop;
+        }
     }
 
     grouping LcafListAddress {
@@ -246,9 +250,13 @@
     			default 1;
     	}
     }
-       list Addresses {
-               uses LispSimpleAddress;
-       }
+        list Addresses {
+            key "name";
+            leaf name {
+                type string;
+            }
+            uses LispSimpleAddress;
+        }
     }
 
        grouping LcafSourceDestAddress {
@@ -394,6 +402,10 @@
 
     grouping LocatorRecords {
     list LocatorRecord {
+        key "name";
+        leaf name {
+            type string;
+        }
     	leaf priority {
     		type uint8;
     	}

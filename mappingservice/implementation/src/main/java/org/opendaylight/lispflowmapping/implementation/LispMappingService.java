@@ -337,6 +337,7 @@ public class LispMappingService implements CommandProvider, IFlowMapping, IFlowM
         @Override
         public void onNotification(RequestMapping mapRequestNotification) {
             MapReply mapReply = handleMapRequest(mapRequestNotification.getMapRequest());
+            LOG.info("Replying to Map-Request with Map-Reply:" + mapReply);
             if (mapReply != null) {
                 SendMapReplyInputBuilder smrib = new SendMapReplyInputBuilder();
                 smrib.setMapReply((new MapReplyBuilder(mapReply).build()));

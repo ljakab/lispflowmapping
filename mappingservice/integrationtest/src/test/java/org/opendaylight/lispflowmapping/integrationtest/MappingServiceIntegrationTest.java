@@ -1167,8 +1167,8 @@ public class MappingServiceIntegrationTest {
         assertTrue(fromNetwork.getAddress() instanceof LcafKeyValue);
         LcafKeyValue keyValueFromNetwork = (LcafKeyValue) fromNetwork.getAddress();
 
-        LispAFIAddress receivedAddr1 = (LispAFIAddress) keyValueFromNetwork.getLcafKeyValueAddressAddr().getKey().getPrimitiveAddress();
-        LispAFIAddress receivedAddr2 = (LispAFIAddress) keyValueFromNetwork.getLcafKeyValueAddressAddr().getValue().getPrimitiveAddress();
+        LispAFIAddress receivedAddr1 = LispAFIConvertor.toAFIfromPrimitive(keyValueFromNetwork.getLcafKeyValueAddressAddr().getKey().getPrimitiveAddress());
+        LispAFIAddress receivedAddr2 = LispAFIConvertor.toAFIfromPrimitive(keyValueFromNetwork.getLcafKeyValueAddressAddr().getValue().getPrimitiveAddress());
 
         assertTrue(receivedAddr1 instanceof LispIpv4Address);
         assertTrue(receivedAddr2 instanceof LispMacAddress);

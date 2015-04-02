@@ -144,26 +144,38 @@
     }
 
     grouping LispSimpleAddress {
-       choice primitiveAddress {
-       		case No {
-       			uses LispNoAddress;
-       		}
-       		case Ipv4 {
-       			uses LispIpv4Address;
-       		}
-       		case Ipv6 {
-       			uses LispIpv6Address;
-       		}
-       		case Mac {
-       			uses LispMacAddress;
-       		}
-       		case DistinguishedName {
-				uses LispDistinguishedNameAddress;
-       		}
-       		case AS {
-				uses LispASAddress;
-       		}
-    	}
+        choice primitiveAddress {
+            case No {
+                container NoAddress {
+                    uses LispNoAddress;
+                }
+            }
+            case Ipv4 {
+                container Ipv4Address {
+                    uses LispIpv4Address;
+                }
+            }
+            case Ipv6 {
+                container Ipv6Address {
+                    uses LispIpv6Address;
+                }
+            }
+            case Mac {
+                container MacAddress {
+                    uses LispMacAddress;
+                }
+            }
+            case DistinguishedName {
+                container DistinguishedNameAddress {
+                    uses LispDistinguishedNameAddress;
+                }
+            }
+            case AS {
+                container ASAddress {
+                    uses LispASAddress;
+                }
+            }
+        }
     }
 
     grouping ReencapHop {
@@ -197,8 +209,8 @@
     }
 
     grouping LcafSegmentAddress {
-    	reference http://tools.ietf.org/html/draft-ietf-lisp-lcaf-03#section-4.1;
-       	uses LispLcafAddress{
+        reference "http://tools.ietf.org/html/draft-ietf-lisp-lcaf-03#section-4.1";
+        uses LispLcafAddress{
     		refine lcafType {
     			default 2;
     	}
@@ -216,8 +228,8 @@
        }
     }
     grouping LcafTrafficEngineeringAddress {
-    	reference http://tools.ietf.org/html/draft-ietf-lisp-lcaf-03#section-4.1;
-       	uses LispLcafAddress{
+        reference "http://tools.ietf.org/html/draft-ietf-lisp-lcaf-03#section-4.1";
+        uses LispLcafAddress{
     		refine lcafType {
     			default 10;
     	}
@@ -228,8 +240,8 @@
     }
 
     grouping LcafListAddress {
-    	reference http://tools.ietf.org/html/draft-ietf-lisp-lcaf-03#section-4.1;
-       	uses LispLcafAddress{
+        reference "http://tools.ietf.org/html/draft-ietf-lisp-lcaf-03#section-4.1";
+        uses LispLcafAddress{
     		refine lcafType {
     			default 1;
     	}
@@ -453,8 +465,7 @@
     }
 
     grouping MapRegister {
-    	reference "http://tools.ietf.org/html/rfc6830#section-6.1.6";
-        reference "http://tools.ietf.org/html/draft-ermagan-lisp-nat-traversal-05#section-4.3";
+        reference "http://tools.ietf.org/html/rfc6830#section-6.1.6 , http://tools.ietf.org/html/draft-ermagan-lisp-nat-traversal-05#section-4.3";
     	leaf proxyMapReply {
     		type boolean;
     	}
@@ -478,8 +489,7 @@
     }
 
     grouping MapNotify {
-    	reference "http://tools.ietf.org/html/rfc6830#section-6.1.7";
-        reference "http://tools.ietf.org/html/draft-ermagan-lisp-nat-traversal-05#section-4.3";
+        reference "http://tools.ietf.org/html/rfc6830#section-6.1.7 , http://tools.ietf.org/html/draft-ermagan-lisp-nat-traversal-05#section-4.3";
         leaf xtrSiteIdPresent {
             type boolean;
         }

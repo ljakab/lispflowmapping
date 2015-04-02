@@ -37,7 +37,7 @@ public class LispListLCAFAddressSerializer extends LispLCAFAddressSerializer {
     protected short getLcafLength(LispAFIAddress lispAddress) {
         short totalSize = 0;
         for (Addresses address : ((LcafListAddress) lispAddress).getAddresses()) {
-            totalSize += LispAddressSerializer.getInstance().getAddressSize((LispAFIAddress) address.getPrimitiveAddress());
+            totalSize += LispAddressSerializer.getInstance().getAddressSize(LispAFIConvertor.toAFIfromPrimitive(address.getPrimitiveAddress()));
         }
         return totalSize;
     }
@@ -45,7 +45,7 @@ public class LispListLCAFAddressSerializer extends LispLCAFAddressSerializer {
     @Override
     protected void serializeData(ByteBuffer buffer, LispAFIAddress lispAddress) {
         for (Addresses address : ((LcafListAddress) lispAddress).getAddresses()) {
-            LispAddressSerializer.getInstance().serialize(buffer, (LispAFIAddress) address.getPrimitiveAddress());
+            LispAddressSerializer.getInstance().serialize(buffer, LispAFIConvertor.toAFIfromPrimitive(address.getPrimitiveAddress()));
         }
     }
 
@@ -54,7 +54,7 @@ public class LispListLCAFAddressSerializer extends LispLCAFAddressSerializer {
         List<Addresses> addresses = new ArrayList<Addresses>();
         while (length > 0) {
             PrimitiveAddress address = LispAFIConvertor.toPrimitive(LispAddressSerializer.getInstance().deserialize(buffer));
-            length -= LispAddressSerializer.getInstance().getAddressSize((LispAFIAddress) address);
+            length -= LispAddressSerializer.getInstance().getAddressSize(LispAFIConvertor.toAFIfromPrimitive(address));
             addresses.add(new AddressesBuilder().setPrimitiveAddress((PrimitiveAddress) address).build());
         }
         return new LcafListAddrBuilder().setAddresses(addresses).setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode())

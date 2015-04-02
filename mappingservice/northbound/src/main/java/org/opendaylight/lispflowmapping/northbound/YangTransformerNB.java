@@ -81,66 +81,11 @@ public class YangTransformerNB {
     }
 
     public static PrimitiveAddress toPrimitive(LispAFIAddress address) {
-        if (address instanceof Ipv4Address) {
-            return new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4Builder()
-                    .setIpv4Address(((Ipv4Address) address).getIpv4Address()).setAfi(address.getAfi()).build();
-        }
-        if (address instanceof Ipv6Address) {
-            return new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv6Builder()
-                    .setIpv6Address(((Ipv6Address) address).getIpv6Address()).setAfi(address.getAfi()).build();
-        }
-        if (address instanceof MacAddress) {
-            return new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.MacBuilder()
-                    .setAfi(address.getAfi()).setMacAddress(((MacAddress) address).getMacAddress()).build();
-        }
-        if (address instanceof DistinguishedName) {
-            return new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.DistinguishedNameBuilder()
-                    .setAfi(address.getAfi()).setDistinguishedName(((DistinguishedName) address).getDistinguishedName()).build();
-        }
-        if (address instanceof AS) {
-            return new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.ASBuilder().setAfi(address.getAfi())
-                    .setAS(((AS) address).getAS()).build();
-        }
-        return null;
+        return LispAFIConvertor.toPrimitive(address);
     }
 
     public static LispAFIAddress toAFIfromPrimitive(PrimitiveAddress primitive) {
-
-        if (primitive instanceof org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4) {
-            return new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv4.Ipv4AddressBuilder()
-                    .setAfi(((LispAFIAddress) primitive).getAfi())
-                    .setIpv4Address(
-                            ((org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4) primitive)
-                                    .getIpv4Address()).build();
-        }
-        if (primitive instanceof org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv6) {
-            return new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv6.Ipv6AddressBuilder()
-                    .setAfi(((LispAFIAddress) primitive).getAfi())
-                    .setIpv6Address(
-                            ((org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv6) primitive)
-                                    .getIpv6Address()).build();
-        }
-        if (primitive instanceof org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Mac) {
-            return new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.mac.MacAddressBuilder()
-                    .setAfi(((LispAFIAddress) primitive).getAfi())
-                    .setMacAddress(
-                            ((org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Mac) primitive)
-                                    .getMacAddress()).build();
-        }
-        if (primitive instanceof org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.DistinguishedName) {
-            return new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.distinguishedname.DistinguishedNameBuilder()
-                    .setAfi(((LispAFIAddress) primitive).getAfi())
-                    .setDistinguishedName(
-                            ((org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.DistinguishedName) primitive)
-                                    .getDistinguishedName()).build();
-        }
-        if (primitive instanceof org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.AS) {
-            return new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.as.ASBuilder()
-                    .setAfi(((LispAFIAddress) primitive).getAfi())
-                    .setAS(((org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.AS) primitive).getAS())
-                    .build();
-        }
-        return null;
+        return LispAFIConvertor.toAFIfromPrimitive(primitive);
     }
 
     public static LispAddressContainer transformLispAddress(LispAddress lispAddress) {

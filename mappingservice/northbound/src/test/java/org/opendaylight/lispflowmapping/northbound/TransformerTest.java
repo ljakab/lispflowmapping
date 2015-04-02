@@ -187,12 +187,12 @@ public class TransformerTest extends BaseTestCase{
 		Ipv4Address ipv4AddressSrcOut
 			= ((org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4)
 					lcafSourceDestAddressOut.getSrcAddress().getPrimitiveAddress())
-					.getIpv4Address();
+					.getIpv4Address().getIpv4Address();
 
 		Ipv4Address ipv4AddressDstOut
 		= ((org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4)
 				lcafSourceDestAddressOut.getDstAddress().getPrimitiveAddress())
-				.getIpv4Address();
+				.getIpv4Address().getIpv4Address();
 
 
     	assertEquals(ipv4AddressSrcIn.getValue(),ipv4AddressSrcOut.getValue());

@@ -34,15 +34,15 @@ public class LispKeyValueLCAFSerializer extends LispLCAFAddressSerializer {
     @Override
     protected short getLcafLength(LispAFIAddress lispAddress) {
         return (short) (LispAddressSerializer.getInstance().getAddressSize(
-                (LispAFIAddress) ((LcafKeyValueAddress) lispAddress).getKey().getPrimitiveAddress()) + LispAddressSerializer.getInstance()
-                .getAddressSize((LispAFIAddress) ((LcafKeyValueAddress) lispAddress).getValue().getPrimitiveAddress()));
+                LispAFIConvertor.toAFIfromPrimitive(((LcafKeyValueAddress) lispAddress).getKey().getPrimitiveAddress())) + LispAddressSerializer.getInstance()
+                .getAddressSize(LispAFIConvertor.toAFIfromPrimitive(((LcafKeyValueAddress) lispAddress).getValue().getPrimitiveAddress())));
     }
 
     @Override
     protected void serializeData(ByteBuffer buffer, LispAFIAddress lispAddress) {
         LcafKeyValueAddress lispKeyValueLCAFAddress = ((LcafKeyValueAddress) lispAddress);
-        LispAddressSerializer.getInstance().serialize(buffer, (LispAFIAddress) lispKeyValueLCAFAddress.getKey().getPrimitiveAddress());
-        LispAddressSerializer.getInstance().serialize(buffer, (LispAFIAddress) lispKeyValueLCAFAddress.getValue().getPrimitiveAddress());
+        LispAddressSerializer.getInstance().serialize(buffer, LispAFIConvertor.toAFIfromPrimitive(lispKeyValueLCAFAddress.getKey().getPrimitiveAddress()));
+        LispAddressSerializer.getInstance().serialize(buffer, LispAFIConvertor.toAFIfromPrimitive(lispKeyValueLCAFAddress.getValue().getPrimitiveAddress()));
     }
 
     @Override

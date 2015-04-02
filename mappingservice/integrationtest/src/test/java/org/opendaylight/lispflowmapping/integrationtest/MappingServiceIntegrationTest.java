@@ -88,7 +88,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.LispAddressContainer;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.LcafKeyValue;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.LcafSourceDest;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv4.Ipv4AddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcafapplicationdata.LcafApplicationDataAddr;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcafapplicationdata.LcafApplicationDataAddrBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcafkeyvalue.LcafKeyValueAddressAddrBuilder;
@@ -97,7 +96,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddr;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcafsourcedest.LcafSourceDestAddrBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcaftrafficengineering.LcafTrafficEngineeringAddrBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.mac.MacAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.no.NoAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.locatorrecords.LocatorRecord;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.locatorrecords.LocatorRecordBuilder;
@@ -108,9 +106,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.m
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequestnotification.MapRequestBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.reencaphop.Hop;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.reencaphop.HopBuilder;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.PortNumber;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev100924.MacAddress;
 import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
@@ -156,7 +152,7 @@ public class MappingServiceIntegrationTest {
     @Before
     public void before() throws Exception {
         areWeReady();
-        locatorEid = asIPAfiAddress("4.3.2.1");
+        locatorEid = LispAFIConvertor.asIPAfiAddress("4.3.2.1");
         socket = initSocket(socket, LispMessage.PORT_NUM);
 
         // SRC: 127.0.0.1:58560 to 127.0.0.1:4342
@@ -352,7 +348,7 @@ public class MappingServiceIntegrationTest {
 
     public void mapRegisterWithMapNotifyAndMapRequest() throws SocketTimeoutException {
         cleanUP();
-        LispAFIAddress eid = asIPAfiAddress("1.2.3.4");
+        LispAFIAddress eid = LispAFIConvertor.asIPAfiAddress("1.2.3.4");
 
         MapReply mapReply = registerAddressAndQuery(eid, 32);
 
@@ -366,7 +362,7 @@ public class MappingServiceIntegrationTest {
         cleanUP();
         String macAddress = "01:02:03:04:05:06";
 
-        MapReply reply = registerAddressAndQuery(asMacAfiAddress(macAddress));
+        MapReply reply = registerAddressAndQuery(LispAFIConvertor.asMacAfiAddress(macAddress));
 
         assertTrue(true);
         LispAFIAddress addressFromNetwork = LispAFIConvertor.toAFI(reply.getEidToLocatorRecord().get(0).getLispAddressContainer());
@@ -378,7 +374,7 @@ public class MappingServiceIntegrationTest {
 
     public void mapRequestMapRegisterAndMapRequest() throws SocketTimeoutException {
         cleanUP();
-        LispAFIAddress eid = asIPAfiAddress("1.2.3.4");
+        LispAFIAddress eid = LispAFIConvertor.asIPAfiAddress("1.2.3.4");
         MapRequestBuilder mapRequestBuilder = new MapRequestBuilder();
         mapRequestBuilder.setNonce((long) 4);
         mapRequestBuilder.setSourceEid(new SourceEidBuilder().setLispAddressContainer(
@@ -388,7 +384,7 @@ public class MappingServiceIntegrationTest {
                 new EidRecordBuilder().setMask((short) 32).setLispAddressContainer(LispAFIConvertor.toContainer(eid)).build());
         mapRequestBuilder.setItrRloc(new ArrayList<ItrRloc>());
         mapRequestBuilder.getItrRloc().add(
-                new ItrRlocBuilder().setLispAddressContainer(LispAFIConvertor.toContainer(asIPAfiAddress(ourAddress))).build());
+                new ItrRlocBuilder().setLispAddressContainer(LispAFIConvertor.toContainer(LispAFIConvertor.asIPAfiAddress(ourAddress))).build());
         sendMapRequest(mapRequestBuilder.build());
         MapReply mapReply = receiveMapReply();
         assertEquals(4, mapReply.getNonce().longValue());
@@ -401,7 +397,7 @@ public class MappingServiceIntegrationTest {
         etlrBuilder.setMaskLength((short) 32);
         etlrBuilder.setRecordTtl(254);
         LocatorRecordBuilder recordBuilder = new LocatorRecordBuilder();
-        recordBuilder.setLispAddressContainer(LispAFIConvertor.toContainer(asIPAfiAddress("4.3.2.1")));
+        recordBuilder.setLispAddressContainer(LispAFIConvertor.toContainer(LispAFIConvertor.asIPAfiAddress("4.3.2.1")));
         etlrBuilder.setLocatorRecord(new ArrayList<LocatorRecord>());
         etlrBuilder.getLocatorRecord().add(recordBuilder.build());
         mapRegisterbuilder.setEidToLocatorRecord(new ArrayList<EidToLocatorRecord>());
@@ -419,10 +415,10 @@ public class MappingServiceIntegrationTest {
 
     public void testMapRegisterDosntOverwritesOtherSubKeys() throws SocketTimeoutException {
         cleanUP();
-        LispAFIAddress eid = asIPAfiAddress("1.2.3.4");
-        LispAFIAddress rloc1Value = asIPAfiAddress("4.3.2.1");
+        LispAFIAddress eid = LispAFIConvertor.asIPAfiAddress("1.2.3.4");
+        LispAFIAddress rloc1Value = LispAFIConvertor.asIPAfiAddress("4.3.2.1");
         LispAFIAddress rloc1 = LispAFIConvertor.asKeyValue("subkey1", LispAFIConvertor.toPrimitive(rloc1Value));
-        LispAFIAddress rloc2Value = asIPAfiAddress("4.3.2.2");
+        LispAFIAddress rloc2Value = LispAFIConvertor.asIPAfiAddress("4.3.2.2");
         LispAFIAddress rloc2 = LispAFIConvertor.asKeyValue("subkey2", LispAFIConvertor.toPrimitive(rloc2Value));
         MapReply mapReply = sendMapRegisterTwiceWithDiffrentValues(eid, rloc1, rloc2);
         assertEquals(2, mapReply.getEidToLocatorRecord().get(0).getLocatorRecord().size());
@@ -432,10 +428,10 @@ public class MappingServiceIntegrationTest {
 
     public void testMapRegisterOverwritesSameSubkey() throws SocketTimeoutException {
         cleanUP();
-        LispAFIAddress eid = asIPAfiAddress("1.2.3.4");
-        LispAFIAddress rloc1Value = asIPAfiAddress("4.3.2.1");
+        LispAFIAddress eid = LispAFIConvertor.asIPAfiAddress("1.2.3.4");
+        LispAFIAddress rloc1Value = LispAFIConvertor.asIPAfiAddress("4.3.2.1");
         LispAFIAddress rloc1 = LispAFIConvertor.asKeyValue("subkey", LispAFIConvertor.toPrimitive(rloc1Value));
-        LispAFIAddress rloc2Value = asIPAfiAddress("4.3.2.2");
+        LispAFIAddress rloc2Value = LispAFIConvertor.asIPAfiAddress("4.3.2.2");
         LispAFIAddress rloc2 = LispAFIConvertor.asKeyValue("subkey", LispAFIConvertor.toPrimitive(rloc2Value));
         MapReply mapReply = sendMapRegisterTwiceWithDiffrentValues(eid, rloc1, rloc2);
         assertEquals(1, mapReply.getEidToLocatorRecord().get(0).getLocatorRecord().size());
@@ -445,9 +441,9 @@ public class MappingServiceIntegrationTest {
     public void testMapRegisterOverwritesNoSubkey() throws SocketTimeoutException {
         cleanUP();
         lms.setOverwrite(true);
-        LispAFIAddress eid = asIPAfiAddress("1.2.3.4");
-        LispAFIAddress rloc1Value = asIPAfiAddress("4.3.2.1");
-        LispAFIAddress rloc2Value = asIPAfiAddress("4.3.2.2");
+        LispAFIAddress eid = LispAFIConvertor.asIPAfiAddress("1.2.3.4");
+        LispAFIAddress rloc1Value = LispAFIConvertor.asIPAfiAddress("4.3.2.1");
+        LispAFIAddress rloc2Value = LispAFIConvertor.asIPAfiAddress("4.3.2.2");
         MapReply mapReply = sendMapRegisterTwiceWithDiffrentValues(eid, rloc1Value, rloc2Value);
         assertEquals(1, mapReply.getEidToLocatorRecord().get(0).getLocatorRecord().size());
         assertEquals(LispAFIConvertor.toContainer(rloc2Value), mapReply.getEidToLocatorRecord().get(0).getLocatorRecord().get(0)
@@ -457,9 +453,9 @@ public class MappingServiceIntegrationTest {
     public void testMapRegisterDoesntOverwritesNoSubkey() throws SocketTimeoutException {
         cleanUP();
         lms.setOverwrite(false);
-        LispAFIAddress eid = asIPAfiAddress("1.2.3.4");
-        LispAFIAddress rloc1Value = asIPAfiAddress("4.3.2.1");
-        LispAFIAddress rloc2Value = asIPAfiAddress("4.3.2.2");
+        LispAFIAddress eid = LispAFIConvertor.asIPAfiAddress("1.2.3.4");
+        LispAFIAddress rloc1Value = LispAFIConvertor.asIPAfiAddress("4.3.2.1");
+        LispAFIAddress rloc2Value = LispAFIConvertor.asIPAfiAddress("4.3.2.2");
         MapReply mapReply = sendMapRegisterTwiceWithDiffrentValues(eid, rloc1Value, rloc2Value);
         assertEquals(2, mapReply.getEidToLocatorRecord().get(0).getLocatorRecord().size());
         LispAddressContainer rloc1ReturnValueContainer = mapReply.getEidToLocatorRecord().get(0).getLocatorRecord().get(0).getLispAddressContainer();
@@ -529,7 +525,7 @@ public class MappingServiceIntegrationTest {
         MapRequest smr = MapRequestSerializer.getInstance().deserialize(readBuf);
         assertTrue(smr.isSmr());
         LispAddressContainer smrEid = smr.getEidRecord().get(0).getLispAddressContainer();
-        assertTrue(LispAFIConvertor.toContainer(asIPAfiAddress("153.16.254.1")).equals(smrEid));
+        assertTrue(LispAFIConvertor.toContainer(LispAFIConvertor.asIPAfiAddress("153.16.254.1")).equals(smrEid));
     }
 
     // --------------------- Northbound Tests ---------------------------
@@ -568,7 +564,7 @@ public class MappingServiceIntegrationTest {
         lms.addAuthenticationKey(LispAFIConvertor.toContainer(sourceDestAddress), mask1, pass);
 
         // URL url = createGetKeyIPv4URL(address1, mask1);
-        URL url = createGetKeySourceDestURL(address1.getAfi(), ((LispIpv4Address) sourceDestAddress.getSrcAddress().getPrimitiveAddress())
+        URL url = createGetKeySourceDestURL(address1.getIpv4Address().getAfi(), ((LispIpv4Address) sourceDestAddress.getSrcAddress().getPrimitiveAddress())
                 .getIpv4Address().getValue(), sourceDestAddress.getSrcMaskLength(), ((LispIpv4Address) sourceDestAddress.getDstAddress()
                 .getPrimitiveAddress()).getIpv4Address().getValue(), sourceDestAddress.getDstMaskLength());
         String reply = callURL("GET", null, "application/json", null, url);
@@ -766,7 +762,10 @@ public class MappingServiceIntegrationTest {
         lms.handleMapRegister(mapRegister.build(), false);
 
         // Get mapping using NB interface. No IID used
-        URL url = createGetMappingSourceDestURL(address1.getAfi(), address1.getIpv4Address().getValue(), mask1, address2.getIpv4Address().getValue(),
+        URL url = createGetMappingSourceDestURL(address1.getIpv4Address().getAfi(),
+                address1.getIpv4Address().getIpv4Address().getValue(),
+                mask1,
+                address2.getIpv4Address().getIpv4Address().getValue(),
                 mask2);
         String reply = callURL("GET", null, "application/json", null, url);
         JSONTokener jt = new JSONTokener(reply);
@@ -931,7 +930,7 @@ public class MappingServiceIntegrationTest {
         assertEquals(8, mapNotify.getNonce().longValue());
         MapRequestBuilder mapRequest = new MapRequestBuilder();
         mapRequest.setNonce((long) 4);
-        mapRequest.setSourceEid(new SourceEidBuilder().setLispAddressContainer(LispAFIConvertor.toContainer(asIPAfiAddress(ourAddress))).build());
+        mapRequest.setSourceEid(new SourceEidBuilder().setLispAddressContainer(LispAFIConvertor.toContainer(LispAFIConvertor.asIPAfiAddress(ourAddress))).build());
         mapRequest.setEidRecord(new ArrayList<EidRecord>());
         mapRequest.setAuthoritative(false);
         mapRequest.setMapDataPresent(false);
@@ -1100,10 +1099,10 @@ public class MappingServiceIntegrationTest {
         mapRequestBuilder.getEidRecord().add(
                 new EidRecordBuilder().setMask((short) 32).setLispAddressContainer(LispAFIConvertor.toContainer(eid)).build());
         mapRequestBuilder.setItrRloc(new ArrayList<ItrRloc>());
-        mapRequestBuilder.setSourceEid(new SourceEidBuilder().setLispAddressContainer(LispAFIConvertor.toContainer(asIPAfiAddress(ourAddress)))
+        mapRequestBuilder.setSourceEid(new SourceEidBuilder().setLispAddressContainer(LispAFIConvertor.toContainer(LispAFIConvertor.asIPAfiAddress(ourAddress)))
                 .build());
         mapRequestBuilder.getItrRloc().add(
-                new ItrRlocBuilder().setLispAddressContainer(LispAFIConvertor.toContainer(asIPAfiAddress(ourAddress))).build());
+                new ItrRlocBuilder().setLispAddressContainer(LispAFIConvertor.toContainer(LispAFIConvertor.asIPAfiAddress(ourAddress))).build());
         mapRequestBuilder.setAuthoritative(false);
         mapRequestBuilder.setMapDataPresent(false);
         mapRequestBuilder.setPitr(false);
@@ -1120,8 +1119,8 @@ public class MappingServiceIntegrationTest {
         cleanUP();
         String ipString = "10.20.30.200";
         String macString = "01:02:03:04:05:06";
-        org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4 addrToSend1 = asPrimitiveIPAfiAddress(ipString);
-        org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Mac addrToSend2 = asPrimitiveMacAfiAddress(macString);
+        org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4 addrToSend1 = LispAFIConvertor.asPrimitiveIPAfiAddress(ipString);
+        org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Mac addrToSend2 = LispAFIConvertor.asPrimitiveMacAfiAddress(macString);
         LcafSourceDestAddrBuilder builder = new LcafSourceDestAddrBuilder();
         builder.setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode());
         builder.setLcafType((short) LispCanonicalAddressFormatEnum.SOURCE_DEST.getLispCode());
@@ -1154,8 +1153,8 @@ public class MappingServiceIntegrationTest {
         cleanUP();
         String ipString = "10.20.30.200";
         String macString = "01:02:03:04:05:06";
-        org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4 addrToSend1 = asPrimitiveIPAfiAddress(ipString);
-        org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Mac addrToSend2 = asPrimitiveMacAfiAddress(macString);
+        org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4 addrToSend1 = LispAFIConvertor.asPrimitiveIPAfiAddress(ipString);
+        org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Mac addrToSend2 = LispAFIConvertor.asPrimitiveMacAfiAddress(macString);
         LcafKeyValueAddressAddrBuilder builder = new LcafKeyValueAddressAddrBuilder();
         builder.setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode());
         builder.setLcafType((short) LispCanonicalAddressFormatEnum.KEY_VALUE.getLispCode());
@@ -1188,8 +1187,8 @@ public class MappingServiceIntegrationTest {
         LcafListAddrBuilder listbuilder = new LcafListAddrBuilder();
         listbuilder.setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode()).setLcafType((short) LispCanonicalAddressFormatEnum.LIST.getLispCode());
         listbuilder.setAddresses(new ArrayList<Addresses>());
-        listbuilder.getAddresses().add(new AddressesBuilder().setPrimitiveAddress(LispAFIConvertor.toPrimitive(asIPAfiAddress(ipString))).build());
-        listbuilder.getAddresses().add(new AddressesBuilder().setPrimitiveAddress(LispAFIConvertor.toPrimitive(asMacAfiAddress(macString))).build());
+        listbuilder.getAddresses().add(new AddressesBuilder().setPrimitiveAddress(LispAFIConvertor.toPrimitive(LispAFIConvertor.asIPAfiAddress(ipString))).build());
+        listbuilder.getAddresses().add(new AddressesBuilder().setPrimitiveAddress(LispAFIConvertor.toPrimitive(LispAFIConvertor.asMacAfiAddress(macString))).build());
 
         MapReply reply = registerAddressAndQuery(listbuilder.build());
 
@@ -1216,7 +1215,7 @@ public class MappingServiceIntegrationTest {
         builder.setInstanceId((long) instanceId);
         builder.setIidMaskLength((short) 32);
         builder.setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode()).setLcafType((short) LispCanonicalAddressFormatEnum.SEGMENT.getLispCode());
-        builder.setAddress(new AddressBuilder().setPrimitiveAddress(LispAFIConvertor.toPrimitive(asIPAfiAddress(ipString))).build());
+        builder.setAddress(new AddressBuilder().setPrimitiveAddress(LispAFIConvertor.toPrimitive(LispAFIConvertor.asIPAfiAddress(ipString))).build());
 
         MapReply reply = registerAddressAndQuery(builder.build());
 
@@ -1236,9 +1235,9 @@ public class MappingServiceIntegrationTest {
         String macString = "01:02:03:04:05:06";
         String ipString = "10.20.255.30";
         HopBuilder hopBuilder = new HopBuilder();
-        hopBuilder.setPrimitiveAddress(LispAFIConvertor.toPrimitive(asIPAfiAddress(ipString)));
+        hopBuilder.setPrimitiveAddress(LispAFIConvertor.toPrimitive(LispAFIConvertor.asIPAfiAddress(ipString)));
         Hop hop1 = hopBuilder.build();
-        hopBuilder.setPrimitiveAddress(LispAFIConvertor.toPrimitive(asMacAfiAddress(macString)));
+        hopBuilder.setPrimitiveAddress(LispAFIConvertor.toPrimitive(LispAFIConvertor.asMacAfiAddress(macString)));
         Hop hop2 = hopBuilder.build();
         HopsBuilder hb = new HopsBuilder();
         hb.setHop(hop1);
@@ -1299,7 +1298,7 @@ public class MappingServiceIntegrationTest {
         builder.setLocalPort(new PortNumber(localPort));
         builder.setRemotePort(new PortNumber(remotePort));
         builder.setAddress(new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lcafapplicationdataaddress.AddressBuilder()
-                .setPrimitiveAddress(LispAFIConvertor.toPrimitive(asIPAfiAddress(ipString))).build());
+                .setPrimitiveAddress(LispAFIConvertor.toPrimitive(LispAFIConvertor.asIPAfiAddress(ipString))).build());
 
         LcafApplicationDataAddress addressToSend = builder.build();
 
@@ -1333,7 +1332,7 @@ public class MappingServiceIntegrationTest {
                 new EidRecordBuilder().setMask((short) 32).setLispAddressContainer(LispAFIConvertor.toContainer(eid)).build());
         mapRequestBuilder.setItrRloc(new ArrayList<ItrRloc>());
         mapRequestBuilder.getItrRloc().add(
-                new ItrRlocBuilder().setLispAddressContainer(LispAFIConvertor.toContainer(asIPAfiAddress(ourAddress))).build());
+                new ItrRlocBuilder().setLispAddressContainer(LispAFIConvertor.toContainer(LispAFIConvertor.asIPAfiAddress(ourAddress))).build());
         sendMapRequest(mapRequestBuilder.build());
         MapReply mapReply = receiveMapReply();
         assertEquals(4, mapReply.getNonce().longValue());
@@ -1346,7 +1345,7 @@ public class MappingServiceIntegrationTest {
         etlrBuilder.setMaskLength((short) 32);
         etlrBuilder.setRecordTtl(254);
         LocatorRecordBuilder recordBuilder = new LocatorRecordBuilder();
-        recordBuilder.setLispAddressContainer(LispAFIConvertor.toContainer(asIPAfiAddress("4.3.2.1")));
+        recordBuilder.setLispAddressContainer(LispAFIConvertor.toContainer(LispAFIConvertor.asIPAfiAddress("4.3.2.1")));
         etlrBuilder.setLocatorRecord(new ArrayList<LocatorRecord>());
         etlrBuilder.getLocatorRecord().add(recordBuilder.build());
         mapRegisterbuilder.setEidToLocatorRecord(new ArrayList<EidToLocatorRecord>());
@@ -1400,7 +1399,7 @@ public class MappingServiceIntegrationTest {
         MapReply mapReply;
         sendMapRequest(mapRequest);
         mapReply = receiveMapReply();
-        assertEquals(LispAFIConvertor.toContainer(asIPAfiAddress("4.3.2.1")), mapReply.getEidToLocatorRecord().get(0).getLocatorRecord().get(0)
+        assertEquals(LispAFIConvertor.toContainer(LispAFIConvertor.asIPAfiAddress("4.3.2.1")), mapReply.getEidToLocatorRecord().get(0).getLocatorRecord().get(0)
                 .getLispAddressContainer());
         assertCorrectMapReplyTTLAndAction(mapReply, 254, Action.NoAction);
     }
@@ -1452,7 +1451,7 @@ public class MappingServiceIntegrationTest {
     }
 
     private MapRegister createMapRegister(LispIpv4Address eid) {
-        return createMapRegister(eid, asIPAfiAddress("4.3.2.1"));
+        return createMapRegister(eid, LispAFIConvertor.asIPAfiAddress("4.3.2.1"));
     }
 
     private MapRequest createMapRequest(LispAFIAddress eid) {
@@ -1466,7 +1465,7 @@ public class MappingServiceIntegrationTest {
                 new EidRecordBuilder().setMask((short) 32).setLispAddressContainer(LispAFIConvertor.toContainer(eid)).build());
         mapRequestBuilder.setItrRloc(new ArrayList<ItrRloc>());
         mapRequestBuilder.getItrRloc().add(
-                new ItrRlocBuilder().setLispAddressContainer(LispAFIConvertor.toContainer(asIPAfiAddress(ourAddress))).build());
+                new ItrRlocBuilder().setLispAddressContainer(LispAFIConvertor.toContainer(LispAFIConvertor.asIPAfiAddress(ourAddress))).build());
         MapRequest mr = mapRequestBuilder.build();
         return mr;
     }
@@ -1475,7 +1474,7 @@ public class MappingServiceIntegrationTest {
         cleanUP();
         String rloc = "127.0.0.3";
         int port = LispMessage.PORT_NUM;
-        LispAFIAddress ipRloc = asIPAfiAddress(rloc);
+        LispAFIAddress ipRloc = LispAFIConvertor.asIPAfiAddress(rloc);
         sendProxyMapRequest(rloc, port, ipRloc);
 
     }
@@ -1755,24 +1754,6 @@ public class MappingServiceIntegrationTest {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
         }
-    }
-
-    private org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv4.Ipv4Address asIPAfiAddress(String ip) {
-        return new Ipv4AddressBuilder().setIpv4Address(new Ipv4Address(ip)).setAfi((short) AddressFamilyNumberEnum.IP.getIanaCode()).build();
-    }
-
-    private org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4 asPrimitiveIPAfiAddress(String ip) {
-        return new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv4Builder()
-                .setIpv4Address(new Ipv4Address(ip)).setAfi((short) AddressFamilyNumberEnum.IP.getIanaCode()).build();
-    }
-
-    private org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.mac.MacAddress asMacAfiAddress(String mac) {
-        return new MacAddressBuilder().setMacAddress(new MacAddress(mac)).setAfi((short) AddressFamilyNumberEnum.MAC.getIanaCode()).build();
-    }
-
-    private org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Mac asPrimitiveMacAfiAddress(String mac) {
-        return new org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.MacBuilder()
-                .setMacAddress(new MacAddress(mac)).setAfi((short) AddressFamilyNumberEnum.MAC.getIanaCode()).build();
     }
 
     private void cleanUP() {

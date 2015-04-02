@@ -36,8 +36,8 @@ public class LispSourceDestLCAFAddressSerializer extends LispLCAFAddressSerializ
     protected short getLcafLength(LispAFIAddress lispAddress) {
         return (short) (Length.ALL_FIELDS
                 + LispAddressSerializer.getInstance().getAddressSize(
-                        (LispAFIAddress) ((LcafSourceDestAddress) lispAddress).getSrcAddress().getPrimitiveAddress()) + LispAddressSerializer
-                .getInstance().getAddressSize((LispAFIAddress) ((LcafSourceDestAddress) lispAddress).getDstAddress().getPrimitiveAddress()));
+                        LispAFIConvertor.toAFIfromPrimitive(((LcafSourceDestAddress) lispAddress).getSrcAddress().getPrimitiveAddress())) + LispAddressSerializer
+                .getInstance().getAddressSize(LispAFIConvertor.toAFIfromPrimitive(((LcafSourceDestAddress) lispAddress).getDstAddress().getPrimitiveAddress())));
     }
 
     @Override
@@ -46,8 +46,8 @@ public class LispSourceDestLCAFAddressSerializer extends LispLCAFAddressSerializ
         buffer.putShort((short) 0);
         buffer.put(lispSourceDestLCAFAddress.getSrcMaskLength().byteValue());
         buffer.put(lispSourceDestLCAFAddress.getDstMaskLength().byteValue());
-        LispAddressSerializer.getInstance().serialize(buffer, (LispAFIAddress) lispSourceDestLCAFAddress.getSrcAddress().getPrimitiveAddress());
-        LispAddressSerializer.getInstance().serialize(buffer, (LispAFIAddress) lispSourceDestLCAFAddress.getDstAddress().getPrimitiveAddress());
+        LispAddressSerializer.getInstance().serialize(buffer, LispAFIConvertor.toAFIfromPrimitive(lispSourceDestLCAFAddress.getSrcAddress().getPrimitiveAddress()));
+        LispAddressSerializer.getInstance().serialize(buffer, LispAFIConvertor.toAFIfromPrimitive(lispSourceDestLCAFAddress.getDstAddress().getPrimitiveAddress()));
     }
 
     @Override

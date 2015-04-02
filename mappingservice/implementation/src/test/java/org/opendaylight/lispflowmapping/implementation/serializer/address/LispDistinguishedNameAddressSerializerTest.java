@@ -15,6 +15,7 @@ import junitx.framework.ArrayAssert;
 
 import org.junit.Test;
 import org.opendaylight.lispflowmapping.implementation.lisp.exception.LispSerializationException;
+import org.opendaylight.lispflowmapping.implementation.util.LispAFIConvertor;
 import org.opendaylight.lispflowmapping.tools.junit.BaseTestCase;
 import org.opendaylight.lispflowmapping.type.AddressFamilyNumberEnum;
 import org.opendaylight.lispflowmapping.type.LispCanonicalAddressFormatEnum;
@@ -58,8 +59,8 @@ public class LispDistinguishedNameAddressSerializerTest extends BaseTestCase {
 
         assertEquals(LispCanonicalAddressFormatEnum.LIST.getLispCode(), lispLCAFAddress.getLcafType().byteValue());
 
-        LispDistinguishedNameAddress distinguishedNameAddress = (LispDistinguishedNameAddress) lispLCAFAddress.getAddresses().get(0)
-                .getPrimitiveAddress();
+        LispDistinguishedNameAddress distinguishedNameAddress = (LispDistinguishedNameAddress) LispAFIConvertor.toAFIfromPrimitive(lispLCAFAddress.getAddresses().get(0)
+                .getPrimitiveAddress());
 
         assertEquals("david", distinguishedNameAddress.getDistinguishedName());
 

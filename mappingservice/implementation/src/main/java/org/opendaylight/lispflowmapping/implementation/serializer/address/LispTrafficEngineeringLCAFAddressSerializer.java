@@ -41,7 +41,7 @@ public class LispTrafficEngineeringLCAFAddressSerializer extends LispLCAFAddress
         short totalSize = 0;
         if (((LcafTrafficEngineeringAddress) lispAddress).getHops() != null) {
             for (Hops hop : ((LcafTrafficEngineeringAddress) lispAddress).getHops()) {
-                totalSize += LispAddressSerializer.getInstance().getAddressSize((LispAFIAddress) hop.getHop().getPrimitiveAddress()) + 2;
+                totalSize += LispAddressSerializer.getInstance().getAddressSize(LispAFIConvertor.toAFIfromPrimitive(hop.getHop().getPrimitiveAddress())) + 2;
             }
         }
         return totalSize;
@@ -55,7 +55,7 @@ public class LispTrafficEngineeringLCAFAddressSerializer extends LispLCAFAddress
                 buffer.put((byte) (ByteUtil.boolToBit(BooleanUtils.isTrue(hop.isLookup()), Flags.LOOKUP) | //
                         ByteUtil.boolToBit(BooleanUtils.isTrue(hop.isRLOCProbe()), Flags.RLOC_PROBE) | //
                 ByteUtil.boolToBit(BooleanUtils.isTrue(hop.isStrict()), Flags.STRICT)));
-                LispAddressSerializer.getInstance().serialize(buffer, (LispAFIAddress) hop.getHop().getPrimitiveAddress());
+                LispAddressSerializer.getInstance().serialize(buffer, LispAFIConvertor.toAFIfromPrimitive(hop.getHop().getPrimitiveAddress()));
             }
         }
     }
@@ -74,7 +74,7 @@ public class LispTrafficEngineeringLCAFAddressSerializer extends LispLCAFAddress
             builder.setRLOCProbe(RLOCProbe);
             builder.setStrict(strict);
             builder.setHop(new HopBuilder().setPrimitiveAddress(address).build());
-            length -= LispAddressSerializer.getInstance().getAddressSize((LispAFIAddress) address) + 2;
+            length -= LispAddressSerializer.getInstance().getAddressSize(LispAFIConvertor.toAFIfromPrimitive(address)) + 2;
             hops.add(builder.build());
         }
         return new LcafTrafficEngineeringAddrBuilder().setAfi(AddressFamilyNumberEnum.LCAF.getIanaCode())

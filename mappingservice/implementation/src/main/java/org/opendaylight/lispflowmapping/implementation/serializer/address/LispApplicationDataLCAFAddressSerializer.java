@@ -36,7 +36,7 @@ public class LispApplicationDataLCAFAddressSerializer extends LispLCAFAddressSer
     @Override
     protected short getLcafLength(LispAFIAddress lispAddress) {
         return (short) (Length.ALL_FIELDS + LispAddressSerializer.getInstance().getAddressSize(
-                (LispAFIAddress) ((LcafApplicationDataAddress) lispAddress).getAddress().getPrimitiveAddress()));
+                LispAFIConvertor.toAFIfromPrimitive(((LcafApplicationDataAddress) lispAddress).getAddress().getPrimitiveAddress())));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class LispApplicationDataLCAFAddressSerializer extends LispLCAFAddressSer
             buffer.putShort((short) 0);
         }
         LispAddressSerializer.getInstance().serialize(buffer,
-                (LispAFIAddress) ((LcafApplicationDataAddress) lispAddress).getAddress().getPrimitiveAddress());
+                LispAFIConvertor.toAFIfromPrimitive(((LcafApplicationDataAddress) lispAddress).getAddress().getPrimitiveAddress()));
     }
 
     @Override

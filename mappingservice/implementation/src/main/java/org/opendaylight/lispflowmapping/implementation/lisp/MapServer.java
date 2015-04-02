@@ -195,7 +195,7 @@ public class MapServer extends AbstractLispComponent implements IMapServerAsync 
         if (address instanceof LcafKeyValue) {
             LcafKeyValue keyVal = (LcafKeyValue) address;
             if (keyVal.getLcafKeyValueAddressAddr().getKey().getPrimitiveAddress() instanceof DistinguishedName) {
-                return ((DistinguishedName) keyVal.getLcafKeyValueAddressAddr().getKey().getPrimitiveAddress()).getDistinguishedName();
+                return ((DistinguishedName) keyVal.getLcafKeyValueAddressAddr().getKey().getPrimitiveAddress()).getDistinguishedNameAddress().getDistinguishedName();
             }
         }
         if (shouldOverwrite()) {

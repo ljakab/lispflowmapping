@@ -22,13 +22,13 @@ import org.opendaylight.lispflowmapping.implementation.util.LispAFIConvertor;
 import org.opendaylight.lispflowmapping.tools.junit.BaseTestCase;
 import org.opendaylight.lispflowmapping.type.AddressFamilyNumberEnum;
 import org.opendaylight.lispflowmapping.type.LispCanonicalAddressFormatEnum;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LcafListAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispAFIAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcaflistaddress.Addresses;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lcaflistaddress.AddressesBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcaflist.LcafListAddr;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcaflist.LcafListAddrBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv6;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.LcafListAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.LispAFIAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lcaflistaddress.Addresses;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lcaflistaddress.AddressesBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcaflist.LcafListAddr;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.lcaflist.LcafListAddrBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispsimpleaddress.primitiveaddress.Ipv6;
 
 public class LispListLCAFAddressTest extends BaseTestCase {
 

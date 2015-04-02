@@ -26,16 +26,16 @@ import org.opendaylight.lispflowmapping.interfaces.dao.IMappingServiceKey;
 import org.opendaylight.lispflowmapping.interfaces.dao.MappingEntry;
 import org.opendaylight.lispflowmapping.interfaces.dao.MappingServiceRLOCGroup;
 import org.opendaylight.lispflowmapping.tools.junit.BaseTestCase;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.EidToLocatorRecord.Action;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispAFIAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.MapNotify;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.MapRegister;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecord;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecordBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.no.NoAddressBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.locatorrecords.LocatorRecord;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.locatorrecords.LocatorRecordBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.mapregisternotification.MapRegisterBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.EidToLocatorRecord.Action;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.LispAFIAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapNotify;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapRegister;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecord;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecordBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.no.NoAddressBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.locatorrecords.LocatorRecord;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.locatorrecords.LocatorRecordBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.mapregisternotification.MapRegisterBuilder;
 
 public class MapServerTest extends BaseTestCase {
 

@@ -26,19 +26,19 @@ import org.opendaylight.lispflowmapping.interfaces.dao.ILispDAO;
 import org.opendaylight.lispflowmapping.interfaces.dao.IMappingServiceKey;
 import org.opendaylight.lispflowmapping.interfaces.dao.MappingServiceRLOCGroup;
 import org.opendaylight.lispflowmapping.tools.junit.BaseTestCase;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.EidToLocatorRecord.Action;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispAFIAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.MapReply;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.MapRequest;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidrecords.EidRecord;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidrecords.EidRecordBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecord;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecordBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.locatorrecords.LocatorRecord;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.locatorrecords.LocatorRecordBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequest.ItrRloc;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequest.SourceEidBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequestnotification.MapRequestBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.EidToLocatorRecord.Action;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.LispAFIAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapReply;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapRequest;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidrecords.EidRecord;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidrecords.EidRecordBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecord;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecordBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.locatorrecords.LocatorRecord;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.locatorrecords.LocatorRecordBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequest.ItrRloc;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequest.SourceEidBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequestnotification.MapRequestBuilder;
 
 public class MapResolverTest extends BaseTestCase {
 

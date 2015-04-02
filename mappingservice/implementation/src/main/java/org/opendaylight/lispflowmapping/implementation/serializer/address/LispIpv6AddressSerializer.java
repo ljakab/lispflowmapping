@@ -13,9 +13,9 @@ import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 
 import org.opendaylight.lispflowmapping.type.AddressFamilyNumberEnum;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispAFIAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispIpv6Address;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv6.Ipv6AddressBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.LispAFIAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.LispIpv6Address;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.ipv6.Ipv6AddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv6Address;
 
 public class LispIpv6AddressSerializer extends LispAddressSerializer {

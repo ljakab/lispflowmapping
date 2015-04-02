@@ -18,11 +18,11 @@ import org.junit.Test;
 import org.opendaylight.lispflowmapping.implementation.serializer.MapRegisterSerializer;
 import org.opendaylight.lispflowmapping.implementation.util.LispAFIConvertor;
 import org.opendaylight.lispflowmapping.tools.junit.BaseTestCase;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.MapRegister;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecord;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecordBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.locatorrecords.LocatorRecord;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.mapnotifymessage.MapNotifyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapRegister;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecord;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidtolocatorrecords.EidToLocatorRecordBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.locatorrecords.LocatorRecord;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.mapnotifymessage.MapNotifyBuilder;
 
 public class LispAuthenticationTest extends BaseTestCase {
 

@@ -1,8 +1,8 @@
-module mapping-database {
+module lisp-mapping-database {
 
     yang-version 1;
-    namespace "mapping-database";
-    prefix "mapping-database";
+    namespace "urn:opendaylight:lisp-mapping-database";
+    prefix "lisp-mapping-database";
 
     import lispflowmapping { prefix lfm; revision-date 2015-03-14; }
 

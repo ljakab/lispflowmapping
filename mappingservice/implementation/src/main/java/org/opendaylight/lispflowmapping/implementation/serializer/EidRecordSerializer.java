@@ -12,9 +12,9 @@ import java.nio.ByteBuffer;
 import org.opendaylight.lispflowmapping.implementation.serializer.address.LispAddressSerializer;
 import org.opendaylight.lispflowmapping.implementation.util.ByteUtil;
 import org.opendaylight.lispflowmapping.implementation.util.LispAFIConvertor;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.LispAFIAddress;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidrecords.EidRecord;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidrecords.EidRecordBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.LispAFIAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidrecords.EidRecord;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidrecords.EidRecordBuilder;
 
 public class EidRecordSerializer {
 

@@ -7,7 +7,7 @@
  */
 package org.opendaylight.lispflowmapping.interfaces.lisp;
 
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.MapRequest;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapRequest;
 
 /**
  * The async map resolver interface for dealing with async map request calls.

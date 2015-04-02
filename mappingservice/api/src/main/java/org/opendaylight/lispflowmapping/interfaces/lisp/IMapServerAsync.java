@@ -7,8 +7,8 @@
  */
 package org.opendaylight.lispflowmapping.interfaces.lisp;
 
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.MapRegister;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.LispAddressContainer;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapRegister;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.LispAddressContainer;
 
 /**
  * The async map server interface for dealing with async map register calls.

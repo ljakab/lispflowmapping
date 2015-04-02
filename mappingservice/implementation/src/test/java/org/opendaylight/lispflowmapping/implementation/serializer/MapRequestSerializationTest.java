@@ -20,22 +20,22 @@ import org.junit.Test;
 import org.opendaylight.lispflowmapping.implementation.util.LispAFIConvertor;
 import org.opendaylight.lispflowmapping.tools.junit.BaseTestCase;
 import org.opendaylight.lispflowmapping.type.AddressFamilyNumberEnum;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.EidToLocatorRecord.Action;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.MapRequest;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidrecords.EidRecord;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.eidrecords.EidRecordBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.LispAddressContainerBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Ipv4;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.NoBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.no.NoAddressBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.locatorrecords.LocatorRecord;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.locatorrecords.LocatorRecordBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequest.ItrRloc;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequest.ItrRlocBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequest.MapReply;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequest.MapReplyBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequest.SourceEidBuilder;
-import org.opendaylight.yang.gen.v1.lispflowmapping.rev150314.maprequestnotification.MapRequestBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.EidToLocatorRecord.Action;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.MapRequest;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidrecords.EidRecord;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.eidrecords.EidRecordBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.LispAddressContainerBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.Ipv4;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.NoBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.lispaddress.lispaddresscontainer.address.no.NoAddressBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.locatorrecords.LocatorRecord;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.locatorrecords.LocatorRecordBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequest.ItrRloc;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequest.ItrRlocBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequest.MapReply;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequest.MapReplyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequest.SourceEidBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lispflowmapping.rev150314.maprequestnotification.MapRequestBuilder;
 
 public class MapRequestSerializationTest extends BaseTestCase {
 

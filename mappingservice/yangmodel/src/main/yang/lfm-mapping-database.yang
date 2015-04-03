@@ -73,6 +73,17 @@ module lfm-mapping-database {
         }
     }
 
+    rpc get-key-with-ref {
+        input {
+            leaf key-ref {
+                type key-ref;
+            }
+        }
+        output {
+            uses mapping-key;
+        }
+    }
+
     rpc update-key-with-ref {
         input {
             leaf key-ref {
@@ -127,6 +138,17 @@ module lfm-mapping-database {
     rpc remove-mapping {
         input {
             uses lfm-cp:LispAddress;
+        }
+    }
+
+    rpc get-mapping-with-ref {
+        input {
+            leaf map-ref {
+                type mapping-ref;
+            }
+        }
+        output {
+            uses lfm-cp:EidToLocatorRecord;
         }
     }
 

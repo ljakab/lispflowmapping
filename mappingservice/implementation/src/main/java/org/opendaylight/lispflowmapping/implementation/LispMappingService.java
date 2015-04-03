@@ -61,8 +61,12 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.AddMappingOutput;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.GetKeyInput;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.GetKeyOutput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.GetKeyWithRefInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.GetKeyWithRefOutput;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.GetMappingInput;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.GetMappingOutput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.GetMappingWithRefInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.GetMappingWithRefOutput;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.LfmMappingDatabaseService;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.RemoveKeyInput;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.mapping.database.rev150314.RemoveKeyWithRefInput;
@@ -395,6 +399,12 @@ public class LispMappingService implements CommandProvider, IFlowMapping, IFlowM
     }
 
     @Override
+    public Future<RpcResult<AddKeyOutput>> addKey(AddKeyInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public Future<RpcResult<AddMappingOutput>> addMapping(AddMappingInput input) {
         LOG.info("addMapping RPC called");
         if (input instanceof EidToLocatorRecord) {
@@ -406,19 +416,27 @@ public class LispMappingService implements CommandProvider, IFlowMapping, IFlowM
     }
 
     @Override
-    public Future<RpcResult<AddKeyOutput>> addKey(AddKeyInput input) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public Future<RpcResult<GetKeyOutput>> getKey(GetKeyInput input) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
+    public Future<RpcResult<GetKeyWithRefOutput>> getKeyWithRef(
+            GetKeyWithRefInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public Future<RpcResult<GetMappingOutput>> getMapping(GetMappingInput input) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Future<RpcResult<GetMappingWithRefOutput>> getMappingWithRef(
+            GetMappingWithRefInput input) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -472,5 +490,4 @@ public class LispMappingService implements CommandProvider, IFlowMapping, IFlowM
         // TODO Auto-generated method stub
         return null;
     }
-
 }

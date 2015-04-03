@@ -49,8 +49,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.SendMapReplyInputBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.SendMapRequestInputBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.lispaddress.LispAddressContainer;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.lispaddress.LispAddressContainerBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.lispaddress.lispaddresscontainer.Address;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.lispaddress.lispaddresscontainer.address.ipv4.Ipv4AddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.mapnotifymessage.MapNotifyBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.mapreplymessage.MapReplyBuilder;
@@ -208,9 +206,9 @@ public class LispMappingService implements CommandProvider, IFlowMapping, IFlowM
     }
 
     public void addDefaultKeyIPv4() {
-        LispAddressContainerBuilder builder = new LispAddressContainerBuilder();
-        builder.setAddress((Address) (new Ipv4AddressBuilder().setIpv4Address(new Ipv4Address("0.0.0.0")).build()));
-        addAuthenticationKey(builder.build(), 0, "password");
+        LispAddressContainer address = LispAFIConvertor.toContainer(
+                new Ipv4AddressBuilder().setIpv4Address(new Ipv4Address("0.0.0.0")).build());
+        addAuthenticationKey(address, 0, "password");
     }
 
     public String getHelp() {

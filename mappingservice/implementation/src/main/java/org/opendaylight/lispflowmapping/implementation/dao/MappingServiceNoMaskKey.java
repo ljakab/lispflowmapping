@@ -7,8 +7,10 @@
  */
 package org.opendaylight.lispflowmapping.implementation.dao;
 
+import org.opendaylight.lispflowmapping.implementation.util.LispAFIConvertor;
 import org.opendaylight.lispflowmapping.implementation.util.MaskUtil;
 import org.opendaylight.lispflowmapping.interfaces.dao.IMappingServiceKey;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.LispAFIAddress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.control.plane.rev150314.lispaddress.LispAddressContainer;
 
 public class MappingServiceNoMaskKey implements IMappingServiceKey {
@@ -24,8 +26,9 @@ public class MappingServiceNoMaskKey implements IMappingServiceKey {
     }
 
     public int getMask() {
-        if (MaskUtil.isMaskable(EID.getAddress())) {
-            return MaskUtil.getMaxMask(EID.getAddress());
+        LispAFIAddress eidAFIAddress = LispAFIConvertor.toAFI(EID);
+        if (MaskUtil.isMaskable(eidAFIAddress)) {
+            return MaskUtil.getMaxMask(eidAFIAddress);
         } else {
             return 0;
         }

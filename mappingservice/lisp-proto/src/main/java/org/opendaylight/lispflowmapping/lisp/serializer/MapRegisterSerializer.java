@@ -17,6 +17,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.opendaylight.lispflowmapping.lisp.serializer.exception.LispSerializationException;
 import org.opendaylight.lispflowmapping.lisp.util.ByteUtil;
 import org.opendaylight.lispflowmapping.lisp.util.NumberUtil;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.IpAddressBinary;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.Ipv4AddressBinary;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.MapRegister;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.MessageType;
@@ -145,13 +146,13 @@ public final class MapRegisterSerializer {
 
     }
 
-    private static Ipv4AddressBinary getSourceRloc(InetAddress sourceRloc) {
+    private static IpAddressBinary getSourceRloc(InetAddress sourceRloc) {
         if (sourceRloc == null) {
             sourceRloc = Inet4Address.getLoopbackAddress();
         }
 
         if (sourceRloc instanceof Inet4Address) {
-            return new Ipv4AddressBinary(sourceRloc.getAddress());
+            return new IpAddressBinary(new Ipv4AddressBinary(sourceRloc.getAddress()));
         }
 
         return null;

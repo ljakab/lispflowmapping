@@ -24,7 +24,7 @@ import org.opendaylight.lispflowmapping.lisp.util.LispAddressUtil;
 import org.opendaylight.lispflowmapping.lisp.util.MaskUtil;
 import org.opendaylight.lispflowmapping.lisp.util.SourceDestKeyHelper;
 import org.opendaylight.lispflowmapping.implementation.config.ConfigIni;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.Ipv4AddressBinary;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.IpAddressBinary;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.XtrId;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.locatorrecords.LocatorRecord;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.locatorrecords.LocatorRecordBuilder;
@@ -160,7 +160,7 @@ public final class MappingMergeUtil {
     }
 
     public static MappingRecord mergeXtrIdMappings(List<Object> records, List<XtrId> expiredMappings,
-            Set<Ipv4AddressBinary> sourceRlocs) {
+            Set<IpAddressBinary> sourceRlocs) {
         MappingRecordBuilder mrb = null;
         XtrId xtrId = null;
         Long timestamp = Long.MAX_VALUE;

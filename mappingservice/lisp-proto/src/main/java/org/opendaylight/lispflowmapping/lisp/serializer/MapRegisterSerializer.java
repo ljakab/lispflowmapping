@@ -17,9 +17,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.opendaylight.lispflowmapping.lisp.serializer.exception.LispSerializationException;
 import org.opendaylight.lispflowmapping.lisp.util.ByteUtil;
 import org.opendaylight.lispflowmapping.lisp.util.NumberUtil;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv6Address;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.Ipv4AddressBinary;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.MapRegister;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.MessageType;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.lfm.lisp.proto.rev151105.SiteId;
@@ -147,16 +145,16 @@ public final class MapRegisterSerializer {
 
     }
 
-    private static IpAddress getSourceRloc(InetAddress sourceRloc) {
+    private static Ipv4AddressBinary getSourceRloc(InetAddress sourceRloc) {
         if (sourceRloc == null) {
-            sourceRloc = InetAddress.getLoopbackAddress();
+            sourceRloc = Inet4Address.getLoopbackAddress();
         }
 
         if (sourceRloc instanceof Inet4Address) {
-            return new IpAddress(new Ipv4Address(sourceRloc.getHostAddress()));
-        } else {
-            return new IpAddress(new Ipv6Address(sourceRloc.getHostAddress()));
+            return new Ipv4AddressBinary(sourceRloc.getAddress());
         }
+
+        return null;
     }
 
     private interface Flags {

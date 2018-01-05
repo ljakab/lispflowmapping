@@ -1,0 +1,54 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby ts=2 sw=2 sts=2 et :
+
+# Determine number of available CPU cores
+def numcpus(default)
+  host = RbConfig::CONFIG['host_os']
+  if host =~ /darwin/
+    cpus = `sysctl -n hw.ncpu`.to_i
+  elsif host =~ /linux/
+    cpus = `nproc`.to_i
+  else
+    cpus = default
+  end
+end
+
+Vagrant.configure(2) do |config|
+  # vagrant-cachier caches apt/yum etc. to speed subsequent `vagrant up`
+  # To enable, run `vagrant plugin install vagrant-cachier`
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+    config.cache.synced_folder_opts = {
+      owner: '_apt',
+      group: '_apt',
+      mount_options: ["dmode=777", "fmode=666"]
+    }
+  end
+  config.vm.box = "ubuntu/artful64"
+  config.vm.box_check_update = false
+  # TODO need to figure out how to use #{config.ssh.username} instead of
+  # "ubuntu" to be more general, if the box we use changes the user
+  username = "vagrant"
+  #homedir = ENV['HOME']
+  config.vm.synced_folder "..", "/vagrant"
+  config.vm.synced_folder "..", "/home/#{username}/lispflowmapping"
+  config.vm.synced_folder "#{ENV['HOME']}/.m2", "/home/#{username}/.m2"
+  config.vm.provider :virtualbox do |vb|
+    # This disables generating a log file with boot messages. If you need to
+    # debug the boot process, comment the following line.
+    vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
+  end
+
+  # Main VM for ODL development and testing
+  config.vm.define "odl-dev", primary: true do |main|
+    main.vm.hostname = "odl-dev"
+    main.vm.provision "shell", path: "install-oracle-java8.sh"
+    main.vm.provision "shell", path: "install-maven.sh", privileged: false
+    main.vm.provider :virtualbox do |vb|
+      vb.name = "odl-dev"
+      vb.cpus = 1
+      vb.memory = 4096
+      vb.customize [ "modifyvm", :id, "--description", "VM for OpenDaylight LISP Flow Mapping development" ]
+    end
+  end
+end
